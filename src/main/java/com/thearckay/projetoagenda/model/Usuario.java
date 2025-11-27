@@ -90,5 +90,6 @@ public class Usuario {
 
     public void setAgenda(Agenda agenda) {
         this.agenda = agenda;
+        agenda.setUsuarioDaAgenda(this);
     }
 }

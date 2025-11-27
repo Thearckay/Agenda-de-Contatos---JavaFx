@@ -1,0 +1,12 @@
+.base{
+    -fx-background-radius: 20;
+    -fx-background-color: transparent; 
+}
+
+.fundoEsquerdo{
+    -fx-background-color: linear-gradient(to bottom, #5E25D9, #46148C);
+}
+
+.fundoDireito {
+    -fx-background-color: #46148C;
+}

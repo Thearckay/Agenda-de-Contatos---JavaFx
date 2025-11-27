@@ -57,6 +57,26 @@ public class UsuarioDAO {
         }
     }
 
+    public StatusUsuario verificarDisponibilidadeEmail(String emailAVerificar){
+        try (Connection conexao = FabricaConexao.conectar()){
+            String sqlSelectEmailUsuario = "select email from usuarios where email = ?;";
+
+            PreparedStatement pstmt = conexao.prepareStatement(sqlSelectEmailUsuario);
+            pstmt.setString(1, emailAVerificar);
+
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()){
+                return StatusUsuario.EMAIL_INDISPONIVEL;
+            }
+
+            return StatusUsuario.EMAIL_DISPONIVEL;
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public Usuario pegarUsuario(String email, String senha){
         try(Connection conexao = FabricaConexao.conectar()){
             String sqlSelectUsuario = "select * from usuarios where email = ? and senha = ?;";
@@ -80,6 +100,8 @@ public class UsuarioDAO {
                 usuario.setDataAniversario(rs.getObject("data_aniversario", LocalDate.class));
 
                 Agenda agenda = new Agenda();
+                agenda.setUsuarioDaAgenda(usuario);
+
                 String slqSelectContatos = "select * from contatos where usuario_id = ?;";
                 try (PreparedStatement pstmtAgenda = conexao.prepareStatement(slqSelectContatos);) {
                     pstmtAgenda.setInt(1,usuario.getId());
@@ -100,7 +122,6 @@ public class UsuarioDAO {
                         }
                     }
                 }
-
                 usuario.setAgenda(agenda);
                 return usuario;
             }

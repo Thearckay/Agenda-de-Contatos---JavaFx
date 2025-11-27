@@ -43,6 +43,7 @@ select * from contatos;
 select * from usuarios where email = ? and senha = ?;
 select * from contatos where usuario_id = ?;
 select * from contatos where usuario_id = 10 and id = ?;
+select email from usuarios where email = ?;
 
 delete from usuarios where id = ?
 
@@ -83,7 +84,9 @@ insert into usuarios (nome_completo, numero_telefone, localizacao, email, senha,
     <last-used-providers />
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
-    <open-files />
+    <open-files>
+      <object connection-id="426cf143-291c-49cd-889b-c4fe316ce5c4" object-ref="consoles/Connection" />
+    </open-files>
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">
     <connection id="426cf143-291c-49cd-889b-c4fe316ce5c4" />

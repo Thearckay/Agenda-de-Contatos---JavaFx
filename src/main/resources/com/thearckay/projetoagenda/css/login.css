@@ -2,3 +2,29 @@
 .background-esquerdo {
     -fx-background-color: linear-gradient(to bottom right, #1e2c89, #422b94);
 }
+/* TODO - ver o que tem de errado aqui */
+.emailImput {
+    /* -fx-background-image: url('com/thearckay/projetoagenda/imgs/email.png');*/
+    -fx-background-position: left;
+    -fx-background-repeat: no-repeat;
+    -fx-background-color: white;
+    -fx-background-radius: 5px;
+    -fx-border-color: #cccccc;
+    -fx-border-radius: 5px;
+}
+
+.senhaImput {
+    -fx-background-repeat: no-repeat;
+    -fx-background-color: white;
+    -fx-background-radius: 5px;
+    -fx-border-color: #cccccc;
+    -fx-border-radius: 5px;
+}
+
+.botaoLogin {
+    -fx-background-color: #471ba6;
+}
+
+.links {
+    -fx-background-color: #471ba6;
+}

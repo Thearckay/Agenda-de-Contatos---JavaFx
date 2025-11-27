@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<StackPane xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.thearckay.projetoagenda.controller.CadastroController">
+
+    <HBox style="-fx-background-color: #4812B2;">
+
+        <VBox alignment="CENTER_LEFT" prefWidth="400.0" spacing="10.0" style="-fx-background-color: #4812B2;" HBox.hgrow="SOMETIMES">
+            <padding>
+                <Insets left="60.0" right="60.0" />
+            </padding>
+            <Label text="Crie sua&#10;Conta" textFill="WHITE" wrapText="true">
+                <font>
+                    <Font name="Segoe UI Bold" size="40.0" />
+                </font>
+            </Label>
+            <Label text="Junte-se à nossa comunidade e gerencie seus contatos com facilidade. Comece agora com alguns cliques!" textFill="#e0e0e0" wrapText="true">
+                <font>
+                    <Font name="Segoe UI" size="18.0" />
+                </font>
+            </Label>
+        </VBox>
+
+        <VBox alignment="CENTER_LEFT" prefWidth="587.0" spacing="20.0" style="-fx-background-color: #5821D3;" HBox.hgrow="ALWAYS">
+            <padding>
+                <Insets bottom="40.0" left="80.0" right="80.0" top="40.0" />
+            </padding>
+
+            <VBox spacing="5.0">
+                <Label text="Registrar" textFill="WHITE">
+                    <font>
+                        <Font name="Segoe UI Bold" size="24.0" />
+                    </font>
+                </Label>
+                <HBox spacing="5.0">
+                    <Label text="Já tem uma conta?" textFill="#d3d3d3" />
+                    <Hyperlink fx:id="btnLogarSe" onAction="#voltarTelaLogin" style="-fx-cursor: hand; -fx-border-color: transparent; -fx-padding: 0;" text="Logar-se" textFill="#ffb703">
+                        <font>
+                            <Font name="System Bold" size="12.0" />
+                        </font>
+                    </Hyperlink>
+                </HBox>
+            </VBox>
+
+            <GridPane hgap="20.0" vgap="15.0">
+                <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="50.0" />
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="50.0" />
+                </columnConstraints>
+                <rowConstraints>
+                    <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                    <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                    <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                    <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                </rowConstraints>
+
+                <VBox spacing="5.0">
+                    <Label text="Nome Completo" textFill="WHITE" />
+                    <TextField fx:id="txtNomeCompleto" promptText="Kayck Arcanjo" style="-fx-background-color: #6A35E8; -fx-text-fill: white; -fx-prompt-text-fill: #9CA3AF; -fx-background-radius: 5; -fx-border-color: #7C4DFF; -fx-border-radius: 5;" />
+                </VBox>
+                <VBox spacing="5.0" GridPane.columnIndex="1">
+                    <Label text="Numero de Telefone" textFill="WHITE" />
+                    <TextField fx:id="txtNumeroTelefone" promptText="+55 11 111111111" style="-fx-background-color: #6A35E8; -fx-text-fill: white; -fx-prompt-text-fill: #9CA3AF; -fx-background-radius: 5; -fx-border-color: #7C4DFF; -fx-border-radius: 5;" />
+                </VBox>
+
+                <VBox spacing="5.0" GridPane.rowIndex="1">
+                    <Label text="Localização" textFill="WHITE" />
+                    <TextField fx:id="txtCEP" promptText="Cidade, Estado" style="-fx-background-color: #6A35E8; -fx-text-fill: white; -fx-prompt-text-fill: #9CA3AF; -fx-background-radius: 5; -fx-border-color: #7C4DFF; -fx-border-radius: 5;" />
+                </VBox>
+                <VBox spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                    <Label text="Data de Nascimento" textFill="WHITE" />
+                    <DatePicker fx:id="txtDataNascimento" maxWidth="Infinity" promptText="mm/dd/yyyy" style="-fx-background-color: #6A35E8; -fx-control-inner-background: #6A35E8; -fx-text-fill: white;" />
+                </VBox>
+
+                <VBox spacing="5.0" GridPane.columnSpan="2" GridPane.rowIndex="2">
+                    <Label text="Endereço de E-mail" textFill="WHITE" />
+                    <TextField fx:id="txtCriarEmail" promptText="email@gmail.com" style="-fx-background-color: #6A35E8; -fx-text-fill: white; -fx-prompt-text-fill: #9CA3AF; -fx-background-radius: 5; -fx-border-color: #7C4DFF; -fx-border-radius: 5;" />
+                </VBox>
+
+                <VBox spacing="5.0" GridPane.columnSpan="2" GridPane.rowIndex="3">
+                    <Label text="Senha" textFill="WHITE" />
+                    <PasswordField fx:id="txtCriarSenha" promptText="Crie sua senha" style="-fx-background-color: #6A35E8; -fx-text-fill: white; -fx-prompt-text-fill: #9CA3AF; -fx-background-radius: 5; -fx-border-color: #7C4DFF; -fx-border-radius: 5;" />
+                </VBox>
+
+            </GridPane>
+
+            <Button fx:id="btnCriarConta" maxWidth="Infinity" onAction="#btnCriarConta" style="-fx-background-color: #FFB703; -fx-text-fill: #2F005F; -fx-font-weight: bold; -fx-background-radius: 8; -fx-cursor: hand;" text="Criar Conta">
+                <padding>
+                    <Insets bottom="12.0" top="12.0" />
+                </padding>
+                <font>
+                    <Font size="16.0" />
+                </font>
+            </Button>
+
+        </VBox>
+    </HBox>
+</StackPane>
