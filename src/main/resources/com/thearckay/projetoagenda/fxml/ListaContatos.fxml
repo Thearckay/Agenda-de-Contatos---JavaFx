@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<VBox spacing="20.0" styleClass="root" stylesheets="@../css/listaContatos.css" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.thearckay.projetoagenda.controller.ListaContatoController">
+    <padding>
+        <Insets bottom="20.0" left="30.0" right="30.0" top="30.0" />
+    </padding>
+    <children>
+
+        <HBox alignment="CENTER_LEFT" spacing="20.0">
+            <children>
+                <VBox>
+                    <children>
+                        <Label text="Meus Contatos" textFill="#1E1E2D">
+                            <font>
+                                <Font name="Segoe UI Bold" size="24.0" />
+                            </font>
+                        </Label>
+                        <Label text="Gerencie seus contatos pessoais e profissionais." textFill="#7D7D8D">
+                            <font>
+                                <Font name="Segoe UI" size="14.0" />
+                            </font>
+                        </Label>
+                    </children>
+                </VBox>
+                <Region HBox.hgrow="ALWAYS" />
+
+                <HBox alignment="CENTER_LEFT" style="-fx-background-color: WHITE; -fx-background-radius: 20; -fx-border-color: #E0E0E5; -fx-border-radius: 20;">
+                    <padding>
+                        <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
+                    </padding>
+                    <children>
+                        <Label text="🔍" textFill="#A0A0B0">
+                            <HBox.margin>
+                                <Insets right="5.0" />
+                            </HBox.margin>
+                        </Label>
+                        <TextField fx:id="txtPesquisar" promptText="Pesquisar contatos..." style="-fx-background-color: transparent; -fx-prompt-text-fill: #A0A0B0;" HBox.hgrow="ALWAYS">
+                            <font>
+                                <Font name="Segoe UI" size="13.0" />
+                            </font>
+                        </TextField>
+                    </children>
+                </HBox>
+
+                <Button fx:id="btnAdicionarContato" graphicTextGap="10.0" mnemonicParsing="false" onAction="#abrirFormularioAddContato" style="-fx-background-color: #6A35E8; -fx-text-fill: white; -fx-background-radius: 20; -fx-cursor: hand;" text="Novo Contato">
+                    <padding>
+                        <Insets bottom="8.0" left="15.0" right="15.0" top="8.0" />
+                    </padding>
+                    <font>
+                        <Font name="Segoe UI Bold" size="13.0" />
+                    </font>
+                    <graphic>
+                        <Label text="➕" textFill="WHITE" />
+                    </graphic>
+                </Button>
+            </children>
+        </HBox>
+
+        <SplitPane dividerPositions="0.35" style="-fx-background-color: transparent; -fx-padding: 0;" VBox.vgrow="ALWAYS">
+            <items>
+
+                <VBox style="-fx-background-color: WHITE; -fx-background-radius: 15; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.05), 10, 0, 0, 2);">
+                    <children>
+                        <Label fx:id="lblTotalContatos" text="Lista de Contatos (0)" textFill="#1E1E2D">
+                            <padding>
+                                <Insets bottom="15.0" left="20.0" right="20.0" top="15.0" />
+                            </padding>
+                            <font>
+                                <Font name="Segoe UI Bold" size="16.0" />
+                            </font>
+                        </Label>
+
+                        <ListView fx:id="listaContatos" style="-fx-background-color: transparent; -fx-border-color: transparent;" VBox.vgrow="ALWAYS" />
+                    </children>
+                </VBox>
+
+                <ScrollPane fitToWidth="true" style="-fx-background-color: white; -fx-background: transparent; -fx-padding: 0;">
+                    <content>
+                        <VBox fx:id="painelDetalhesContato" spacing="25.0" style="-fx-background-color: WHITE; -fx-background-radius: 15; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.05), 10, 0, 0, 2);" visible="false">
+                            <padding>
+                                <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+                            </padding>
+                            <children>
+
+                                <HBox alignment="CENTER_LEFT" spacing="20.0">
+                                    <children>
+                                        <StackPane>
+                                            <children>
+                                                <Circle fill="#6A35E8" radius="40.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" />
+                                                <Label fx:id="lblIniciaisGigantes" text="AD" textFill="WHITE">
+                                                    <font>
+                                                        <Font name="Segoe UI Bold" size="28.0" />
+                                                    </font>
+                                                </Label>
+                                            </children>
+                                        </StackPane>
+
+                                        <VBox alignment="CENTER_LEFT">
+                                            <children>
+                                                <Label fx:id="lblNomeDetalhe" styleClass="corPrincipal" text="Alex Doe" textFill="BLUE">
+                                                    <font>
+                                                        <Font name="Segoe UI Bold" size="24.0" />
+                                                    </font>
+                                                </Label>
+                                                <Label fx:id="lblCargoDetalhe" text="Contato Pessoal" textFill="#7D7D8D">
+                                                    <font>
+                                                        <Font name="Segoe UI" size="14.0" />
+                                                    </font>
+                                                </Label>
+                                            </children>
+                                        </VBox>
+                                        <Region HBox.hgrow="ALWAYS" />
+
+                                        <Button fx:id="btnEditarContato" graphicTextGap="8.0" mnemonicParsing="false" style="-fx-background-color: #6A35E8; -fx-text-fill: white; -fx-background-radius: 10; -fx-cursor: hand;" text="Editar">
+                                            <padding>
+                                                <Insets bottom="8.0" left="15.0" right="15.0" top="8.0" />
+                                            </padding>
+                                            <font>
+                                                <Font name="Segoe UI Bold" size="13.0" />
+                                            </font>
+                                 <graphic>
+                                    <FontIcon iconColor="WHITE" iconLiteral="mdi2l-lead-pencil" iconSize="20" styleClass="contrasteComRoxo" />
+                                 </graphic>
+                                        </Button>
+                                        <Button fx:id="btnExcluirContato" mnemonicParsing="false" onAction="#excluirContato" style="-fx-background-color: transparent; -fx-border-color: #E0E0E5; -fx-border-radius: 10; -fx-cursor: hand;">
+                                            <padding>
+                                                <Insets bottom="8.0" left="10.0" right="10.0" top="8.0" />
+                                            </padding>
+                                 <graphic>
+                                    <FontIcon iconColor="RED" iconLiteral="mdi2t-trash-can-outline" iconSize="20" styleClass="perigo" text="󰩺" />
+                                 </graphic>
+                                        </Button>
+                                    </children>
+                                </HBox>
+
+                                <VBox spacing="15.0">
+                                    <children>
+                                        <Label text="Informações de Contato" textFill="#1E1E2D">
+                                            <font>
+                                                <Font name="Segoe UI Bold" size="16.0" />
+                                            </font>
+                                        </Label>
+                                        <GridPane hgap="20.0" vgap="20.0">
+                                            <columnConstraints>
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="50.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="50.0" />
+                                            </columnConstraints>
+                                            <rowConstraints>
+                                                <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                                            </rowConstraints>
+                                            <children>
+
+                                                <HBox fx:id="bgTelefone" alignment="CENTER_LEFT" spacing="15.0" styleClass="backgroundUnidadedetalhes" stylesheets="@../css/listaContatos.css">
+                                                    <padding>
+                                                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                                                    </padding>
+                                                    <children>
+                                          <FontIcon iconLiteral="mdi2p-phone" iconSize="20" styleClass="iconsDetalhesColors" />
+                                                        <VBox>
+                                                            <children>
+                                                                <Label styleClass="informacoes" text="Telefone" textFill="#7D7D8D">
+                                                                    <font>
+                                                                        <Font size="12.0" />
+                                                                    </font>
+                                                                </Label>
+                                                                <Label fx:id="lblTelefoneDetalhe" styleClass="labelInformacoesdetalhes" stylesheets="@../css/dashboard.css" text="+55 11 99999-9999" textFill="#1E1E2D">
+                                                                    <font>
+                                                                        <Font name="Segoe UI" size="14.0" />
+                                                                    </font>
+                                                                </Label>
+                                                            </children>
+                                                        </VBox>
+                                                    </children>
+                                                </HBox>
+
+                                                <HBox fx:id="bgEmail" alignment="CENTER_LEFT" spacing="15.0" styleClass="backgroundUnidadedetalhes" stylesheets="@../css/listaContatos.css" GridPane.columnIndex="1">
+                                                    <padding>
+                                                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                                                    </padding>
+                                                    <children>
+                                          <FontIcon iconLiteral="mdi2e-email" iconSize="20" styleClass="iconsDetalhesColors" />
+                                                        <VBox>
+                                                            <children>
+                                                                <Label styleClass="informacoes" text="Email" textFill="#7D7D8D">
+                                                                    <font>
+                                                                        <Font size="12.0" />
+                                                                    </font>
+                                                                </Label>
+                                                                <Label fx:id="lblEmailDetalhe" styleClass="labelInformacoesdetalhes" stylesheets="@../css/dashboard.css" text="alex.doe@example.com" textFill="#1E1E2D">
+                                                                    <font>
+                                                                        <Font name="Segoe UI" size="14.0" />
+                                                                    </font>
+                                                                </Label>
+                                                            </children>
+                                                        </VBox>
+                                                    </children>
+                                                </HBox>
+
+                                                <HBox fx:id="bgLocalizacao" alignment="CENTER_LEFT" spacing="15.0" styleClass="backgroundUnidadedetalhes" stylesheets="@../css/listaContatos.css" GridPane.rowIndex="1">
+                                                    <padding>
+                                                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                                                    </padding>
+                                                    <children>
+                                          <FontIcon iconLiteral="mdi2m-map-marker" iconSize="20" styleClass="iconsDetalhesColors" />
+                                                        <VBox>
+                                                            <children>
+                                                                <Label styleClass="informacoes" text="Localização" textFill="#7D7D8D">
+                                                                    <font>
+                                                                        <Font size="12.0" />
+                                                                    </font>
+                                                                </Label>
+                                                                <Label fx:id="lblLocalizacaoDetalhe" styleClass="labelInformacoesdetalhes" stylesheets="@../css/dashboard.css" text="São Paulo, SP" textFill="#1E1E2D">
+                                                                    <font>
+                                                                        <Font name="Segoe UI" size="14.0" />
+                                                                    </font>
+                                                                </Label>
+                                                            </children>
+                                                        </VBox>
+                                                    </children>
+                                                </HBox>
+
+                                                <HBox fx:id="bgAniversario" alignment="CENTER_LEFT" spacing="15.0" styleClass="backgroundUnidadedetalhes" stylesheets="@../css/listaContatos.css" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                                    <padding>
+                                                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                                                    </padding>
+                                                    <children>
+                                          <FontIcon iconLiteral="mdi2c-cake" iconSize="20" styleClass="iconsDetalhesColors" />
+                                                        <VBox>
+                                                            <children>
+                                                                <Label styleClass="informacoes" text="Aniversário" textFill="#7D7D8D">
+                                                                    <font>
+                                                                        <Font size="12.0" />
+                                                                    </font>
+                                                                </Label>
+                                                                <Label fx:id="lblNascimentoDetalhe" styleClass="labelInformacoesdetalhes" stylesheets="@../css/dashboard.css" text="15 de Agosto" textFill="#1E1E2D">
+                                                                    <font>
+                                                                        <Font name="Segoe UI" size="14.0" />
+                                                                    </font>
+                                                                </Label>
+                                                            </children>
+                                                        </VBox>
+                                                    </children>
+                                                </HBox>
+                                            </children>
+                                        </GridPane>
+                                    </children>
+                                </VBox>
+
+                                <VBox spacing="10.0">
+                                    <children>
+                                        <Label text="Notas" textFill="#1E1E2D">
+                                            <font>
+                                                <Font name="Segoe UI Bold" size="16.0" />
+                                            </font>
+                                        </Label>
+                                        <Label fx:id="lblNotasDetalhe" maxWidth="Infinity" style="-fx-background-color: #FFF4E5; -fx-background-radius: 10; -fx-border-color: #FFD8A8; -fx-border-radius: 10;" text="Nenhuma nota adicionada para este contato." textFill="#5A5A5A" wrapText="true">
+                                            <padding>
+                                                <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                                            </padding>
+                                            <font>
+                                                <Font name="Segoe UI" size="14.0" />
+                                            </font>
+                                        </Label>
+                                    </children>
+                                </VBox>
+                            </children>
+                        </VBox>
+                    </content>
+                </ScrollPane>
+            </items>
+        </SplitPane>
+    </children>
+</VBox>

@@ -16,6 +16,7 @@ public class MainApplication extends Application {
     }
 
     @Override
+
     public void start(Stage primaryStage) throws IOException {
         BancoDeDadosSetup.inicializar();
         FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("/com/thearckay/projetoagenda/fxml/Login.fxml"));
@@ -23,6 +24,7 @@ public class MainApplication extends Application {
 
         primaryStage.setTitle("Login - Agenda de Contatos");
         primaryStage.setScene(scene);
+        primaryStage.setResizable(false);
         primaryStage.show();
     }
 }

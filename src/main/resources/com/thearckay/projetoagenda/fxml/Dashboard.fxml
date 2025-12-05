@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import org.kordamp.ikonli.javafx.*?>
+
+<StackPane prefHeight="720.0" prefWidth="1080.0" stylesheets="@../css/dashboard.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.thearckay.projetoagenda.controller.DashBoardController">
+    <BorderPane fx:id="dashboardBackground" style="-fx-background-color: #F4F4F9;">
+
+        <left>
+            <VBox prefWidth="220.0" spacing="10.0" style="-fx-background-color: white;">
+                <padding>
+                    <Insets bottom="20.0" left="15.0" right="15.0" top="25.0" />
+                </padding>
+                <children>
+                    <HBox alignment="CENTER_LEFT">
+                        <children>
+                            <Label prefHeight="40.0" prefWidth="29.0" text="📒" textFill="WHITE">
+                                <font>
+                                    <Font size="20.0" />
+                                </font>
+                                <graphic>
+                                    <FontIcon iconLiteral="mdi2c-contacts-outline" iconSize="40" styleClass="logo" />
+                                </graphic>
+                            </Label>
+                            <Label graphicTextGap="0.0" text="Contatos">
+                                <font>
+                                    <Font name="Segoe UI Bold" size="24.0" />
+                                </font>
+                            </Label>
+                        </children>
+                        <VBox.margin>
+                            <Insets bottom="30.0" />
+                        </VBox.margin>
+                    </HBox>
+
+                    <VBox spacing="5.0">
+                        <children>
+                            <Button fx:id="btnContatos" alignment="BASELINE_LEFT" graphicTextGap="15.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#abrirListaContatos" styleClass="botaoSelecionado" text="Contatos">
+                                <padding>
+                                    <Insets bottom="10.0" left="15.0" top="10.0" />
+                                </padding>
+                                <font>
+                                    <Font name="Segoe UI" size="14.0" />
+                                </font>
+                                <graphic>
+                                    <FontIcon iconColor="WHITE" iconLiteral="mdi2a-account-group-outline" iconSize="25" />
+                                </graphic>
+                            </Button>
+                            <Button fx:id="btnFavoritos" alignment="BASELINE_LEFT" graphicTextGap="15.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#abrirContatosFavoritos" styleClass="botaoMenu" stylesheets="@../css/dashboard.css" text="Favoritos">
+                                <padding>
+                                    <Insets bottom="10.0" left="15.0" top="10.0" />
+                                </padding>
+                                <font>
+                                    <Font name="Segoe UI" size="14.0" />
+                                </font>
+                                <graphic>
+                                    <FontIcon iconColor="#d3d3d3" iconLiteral="mdi2a-account-star-outline" iconSize="25" />
+                                </graphic>
+                            </Button>
+                            <Button fx:id="btnLixeira" alignment="BASELINE_LEFT" graphicTextGap="15.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#abrirContatosExluidos" styleClass="botaoMenu" stylesheets="@../css/dashboard.css" text="Lixo">
+                                <font>
+                                    <Font size="14.0" />
+                                </font>
+                                <padding>
+                                    <Insets bottom="10.0" left="15.0" top="10.0" />
+                                </padding>
+                                <graphic>
+                                    <FontIcon iconColor="LIGHTGRAY" iconLiteral="mdi2t-trash-can-outline" iconSize="25" />
+                                </graphic>
+                            </Button>
+                        </children>
+                    </VBox>
+
+                    <Region prefHeight="311.0" prefWidth="190.0" VBox.vgrow="ALWAYS" />
+
+                    <VBox spacing="5.0">
+                        <children>
+                            <Button alignment="BASELINE_LEFT" graphicTextGap="15.0" maxWidth="Infinity" mnemonicParsing="false" styleClass="botaoMenu" stylesheets="@../css/dashboard.css" text="Configurações">
+                                <padding>
+                                    <Insets bottom="10.0" left="15.0" top="10.0" />
+                                </padding>
+                                <font>
+                                    <Font name="Segoe UI" size="14.0" />
+                                </font>
+                                <graphic>
+                                    <Label text="⚙️" textFill="#A0A0B0" />
+                                </graphic>
+                            </Button>
+                            <Button fx:id="btnSair" alignment="BASELINE_LEFT" graphicTextGap="15.0" maxWidth="Infinity" mnemonicParsing="false" onAction="#sair" styleClass="botaoSair" text="Sair" textFill="#ff5555">
+                                <padding>
+                                    <Insets bottom="10.0" left="15.0" top="10.0" />
+                                </padding>
+                                <font>
+                                    <Font name="Segoe UI Bold" size="14.0" />
+                                </font>
+                        <graphic>
+                           <FontIcon fill="#ff5555" iconColor="#ff5555" iconLiteral="mdi2e-exit-to-app" iconSize="25">
+                              <styleClass>
+                                 <String fx:value="botaoSair" />
+                                 <String fx:value="botaoSair" />
+                              </styleClass>
+                           </FontIcon>
+                        </graphic>
+                            </Button>
+                        </children>
+                    </VBox>
+                </children>
+            </VBox>
+        </left>
+
+        <center>
+            <fx:include fx:id="listaContatos" source="ListaContatos.fxml" />
+        </center>
+
+    </BorderPane>
+
+    <StackPane fx:id="dialogoLogout" style="-fx-background-color: rgba(0, 0, 0, 0.4);" visible="false">
+        <children>
+            <VBox maxHeight="250.0" maxWidth="400.0" spacing="20.0" style="-fx-background-color: white; -fx-background-radius: 15; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 10, 0, 0, 2);">
+                <padding>
+                    <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+                </padding>
+                <children>
+                    <HBox alignment="CENTER_RIGHT">
+                        <Label maxWidth="Infinity" text="Confirmação de Logout" textFill="#1E1E2D" HBox.hgrow="ALWAYS">
+                            <font><Font name="Segoe UI Bold" size="16.0" /></font>
+                        </Label>
+                        <Label onMouseClicked="#fecharDialogoLogout" style="-fx-cursor: hand;" text="✕" textFill="#999999">
+                            <font><Font size="14.0" /></font>
+                        </Label>
+                    </HBox>
+
+                    <VBox alignment="CENTER" spacing="10.0" VBox.vgrow="ALWAYS">
+                        <StackPane>
+                            <Circle fill="#FFE5E5" radius="30.0" />
+                            <Label style="-fx-font-size: 24;" text="🚪" textFill="#FF5555" />
+                        </StackPane>
+
+                        <Label text="Você tem certeza que deseja sair?" textFill="#1E1E2D">
+                            <font><Font name="Segoe UI Bold" size="16.0" /></font>
+                        </Label>
+                        <Label text="Você será desconectado da sua conta." textFill="#7D7D8D">
+                            <font><Font name="Segoe UI" size="14.0" /></font>
+                        </Label>
+                    </VBox>
+
+                    <HBox alignment="CENTER" spacing="15.0">
+                        <Button onAction="#fecharDialogoLogout" prefHeight="35" prefWidth="100" style="-fx-background-color: white; -fx-border-color: #E0E0E0; -fx-border-radius: 5; -fx-background-radius: 5; -fx-text-fill: #555; -fx-cursor: hand;" text="Voltar" />
+
+                        <Button onAction="#confirmarLogout" prefHeight="35" prefWidth="100" style="-fx-background-color: #FF5555; -fx-text-fill: white; -fx-background-radius: 5; -fx-font-weight: bold; -fx-cursor: hand;" text="Deslogar" />
+                    </HBox>
+                </children>
+            </VBox>
+        </children>
+    </StackPane>
+</StackPane>

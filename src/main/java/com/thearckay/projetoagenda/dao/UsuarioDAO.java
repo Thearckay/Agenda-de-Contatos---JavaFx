@@ -117,7 +117,7 @@ public class UsuarioDAO {
                             contato.setLocalizacao(rsAgenda.getString("localizacao"));
                             contato.setFavorito(rsAgenda.getBoolean("favorito"));
 
-                            agenda.adicionarContato(contato);
+                            agenda.carregarContatoDoBanco(contato);
 
                         }
                     }

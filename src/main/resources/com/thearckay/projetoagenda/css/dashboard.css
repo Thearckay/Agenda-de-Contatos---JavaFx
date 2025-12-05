@@ -1,0 +1,76 @@
+.root {
+    -fx-font-smoothing-type: gray; /* ou lcd */
+}
+
+.botaoMenu {
+    -fx-background-color: transparent;
+    -fx-text-fill: #A0A0B0; 
+    -fx-cursor: hand;
+    -fx-alignment: BASELINE_LEFT;
+}
+
+.botaoMenu:hover {
+    -fx-background-color: #6A35E8;
+    -fx-text-fill: A0A0B0;
+    -fx-background-radius: 8;
+}
+
+.botaoMenu:hover .ikonli-font-icon {
+    -fx-icon-color: white;
+    -fx-fill: white;
+}
+
+.botaoSair {
+    -fx-background-color: transparent;
+    -fx-text-fill: #FF5555; 
+    -fx-cursor: hand;
+    -fx-alignment: BASELINE_LEFT;
+}
+
+.botaoSair .ikonli-font-icon {
+    -fx-icon-color: #FF5555;
+    -fx-fill: #FF5555;
+}
+
+
+.botaoSair:hover {
+    -fx-background-color: #FF5555;
+    -fx-text-fill: white;
+    -fx-background-radius: 8;
+}
+
+.botaoSair:hover .ikonli-font-icon {
+    -fx-icon-color: white ;
+    -fx-fill: white ;
+}
+
+
+.iconsDetalhesColors{
+    -fx-icon-color: #5e25d9; 
+    -fx-background-color: #5e25d960;
+}
+
+.labelInformacoesdetalhes{
+    -fx-fill: #000000;
+}
+
+
+
+.perigo{
+    -fx-icon-color: #FF5555; 
+}
+
+.contrasteComRoxo{
+    -fx-icon-color: white;
+}
+
+.logo {
+    -fx-icon-color: black;
+    -fx-fill: black;
+}
+
+.botaoSelecionado {
+    -fx-background-color: #6A35E8;
+    -fx-text-fill: white;
+    -fx-background-radius: 8;
+}

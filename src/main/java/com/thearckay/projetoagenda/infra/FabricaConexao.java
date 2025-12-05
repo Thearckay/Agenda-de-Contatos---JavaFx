@@ -10,20 +10,18 @@ import java.util.Properties;
 
 public class FabricaConexao {
 
-    private static String url = carregarPropriedades().getProperty("db.url");
-    private static String usuario = carregarPropriedades().getProperty("db.user");
-    private static String senha = carregarPropriedades().getProperty("db.password");
+    private static final String url = carregarPropriedades().getProperty("db.url");
+    private static final String usuario = carregarPropriedades().getProperty("db.user");
+    private static final String senha = carregarPropriedades().getProperty("db.password");
 
     public static Connection conectar(){
         try {
-            Connection conexao = DriverManager.getConnection(url,usuario,senha);
-            return conexao;
+            return DriverManager.getConnection(url,usuario,senha);
         } catch (SQLException e) {
             throw new RuntimeException("Erro ao tentar se conectar ao banco de dados: "+e);
         }
     }
 
-    // todo - mudar o diretorio do arquivo
     private static Properties carregarPropriedades(){
         try(FileInputStream fs = new FileInputStream("src/main/java/db.properties")){
 

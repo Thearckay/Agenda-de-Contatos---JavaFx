@@ -12,6 +12,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 import java.awt.*;
@@ -25,6 +26,7 @@ public class LoginController {
 
     private UsuarioDAO usuarioDAO = new UsuarioDAO();
 
+    @FXML
     public void onBtnEntrarClick() throws IOException {
         System.out.println("click");
         String email = txtEmail.getText();
@@ -44,24 +46,31 @@ public class LoginController {
         if(usuarioLogado != null){
             try {
                 enviarNotificacaoDesktop("Credenciais válidas", "Logado com Sucesso!");
-                FXMLLoader dashboardLoader = new FXMLLoader(getClass().getResource("/com/thearckay/projetoagenda/fxml/DashBoard.fxml"));
+                FXMLLoader dashboardLoader = new FXMLLoader(getClass().getResource("/com/thearckay/projetoagenda/fxml/Dashboard.fxml"));
                 Parent root = dashboardLoader.load();
+
+                DashBoardController dashBoardController = dashboardLoader.getController();
+
+                dashBoardController.setUsuarioLogado(usuarioLogado);
 
                 Stage janelaAtual = (Stage) txtEmail.getScene().getWindow();
                 Scene cenaDashboard = new Scene(root);
+                janelaAtual.setResizable(true);
                 janelaAtual.setScene(cenaDashboard);
-                janelaAtual.centerOnScreen();
+                janelaAtual.setMaximized(true);
 
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
 
         } else {
+            enviarNotificacaoDesktop("Erro", "Credenciais incorretas ou usuário inexistente.");
             return;
         }
 
     }
 
+    @FXML
     public void btnCriarConta() throws IOException {
         try{
             Stage janela = (Stage) txtEmail.getScene().getWindow();

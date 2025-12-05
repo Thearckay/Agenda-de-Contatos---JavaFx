@@ -4,6 +4,8 @@ module com.thearckay.projetoagenda {
     requires java.sql;
     requires jdk.compiler;
     requires java.desktop;
+    requires javafx.base;
+    requires javafx.graphics;
 
 
     opens com.thearckay.projetoagenda to javafx.fxml;

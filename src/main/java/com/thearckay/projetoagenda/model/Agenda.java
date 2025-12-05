@@ -29,6 +29,20 @@ public class Agenda {
         return status;
     }
 
+    public StatusContato removerContato(Contato contatoARemover, Usuario usuarioLogado){
+        StatusContato status = contatoDAO.deletarContato(contatoARemover, usuarioLogado);
+        agendaContatos.remove(contatoARemover);
+
+        return status;
+    }
+
+    public void carregarContatoDoBanco(Contato contato) {
+        if (this.agendaContatos == null) {
+            this.agendaContatos = new ArrayList<>();
+        }
+        this.agendaContatos.add(contato);
+    }
+
     // Getters e Setters
     public Usuario getUsuarioDaAgenda() {
         return usuarioDaAgenda;
@@ -44,5 +58,18 @@ public class Agenda {
 
     public void setAgendaContatos(List<Contato> agendaContatos) {
         this.agendaContatos = agendaContatos;
+    }
+
+    public Integer getQuantidade(){
+        return agendaContatos.size();
+    }
+
+    public StatusContato adicionarNovoContato(Contato novoContato) {
+        if (novoContato != null){
+            agendaContatos.add(novoContato);
+            return StatusContato.SUCESSO;
+        }
+
+        return null;
     }
 }

@@ -1,0 +1,21 @@
+.root{
+    -fx-background-color:  #F6F6F8;
+}
+
+.backgroundUnidadedetalhes{
+    -fx-background-color: #cfcfcf70;
+    -fx-background-radius: 10;
+}
+
+.informacoes{
+    -fx-text-fill: #222222;
+}
+
+.iconsDetalhesColors{
+    -fx-icon-color: #5e25d9; 
+    -fx-background-color: #5e25d960;
+}
+
+.corPrincipal{
+    -fx-fill: #5e25d9;
+}
