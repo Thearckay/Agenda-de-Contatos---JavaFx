@@ -31,6 +31,8 @@ public class BancoDeDadosSetup {
                     email VARCHAR(255),
                     localizacao VARCHAR(255),
                     favorito BOOLEAN DEFAULT FALSE,
+                    data_nascimento DATE,
+                    deletado BOOLEAN DEFAULT FALSE,
                     FOREIGN KEY (usuario_id) REFERENCES usuarios(id)
                 );
             """;

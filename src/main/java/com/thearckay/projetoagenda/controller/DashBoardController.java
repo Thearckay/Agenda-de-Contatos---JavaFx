@@ -1,5 +1,6 @@
 package com.thearckay.projetoagenda.controller;
 
+import com.thearckay.projetoagenda.model.Contato;
 import com.thearckay.projetoagenda.model.Usuario;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -34,6 +35,7 @@ public class DashBoardController implements Initializable {
     public void abrirListaContatos() {
         selecionarBotao(btnContatos);
         listaContatosController.carregardadosNaLista();
+        listaContatosController.criarCelulas();
         try {
             FXMLLoader loaderLista = new FXMLLoader(getClass().getResource("/com/thearckay/projetoagenda/fxml/ListaContatos.fxml"));
             Parent rootLista = loaderLista.load();
@@ -57,8 +59,11 @@ public class DashBoardController implements Initializable {
         try {
             FXMLLoader loaderFavoritos = new FXMLLoader(getClass().getResource("/com/thearckay/projetoagenda/fxml/ContatosFavoritos.fxml"));
             Parent moduloFavoritos = loaderFavoritos.load();
+            ContatosFavoritosController controller = loaderFavoritos.getController();
 
+            controller.setDashBoardController(this);
             dashboardBackground.setCenter(moduloFavoritos);
+
 
         } catch (Exception e) {
             throw new RuntimeException("Erro ao tentar mudar o módulo do dashboard para os contatos favoritos",e);
@@ -98,7 +103,22 @@ public class DashBoardController implements Initializable {
         dashboardBackground.setEffect(new GaussianBlur(10));
     }
 
+    public void abrirEdicaoDeContato(Contato ultimoContatoClicado){
+        try {
+            FXMLLoader edicaoLoader = new FXMLLoader(getClass().getResource("/com/thearckay/projetoagenda/fxml/EditarContato.fxml"));
+            Parent edicaoRaiz = edicaoLoader.load();
 
+            EditarContatoController controller = edicaoLoader.getController();
+
+            controller.setDashBoardController(this);
+            controller.informarContatoParaEdicao(ultimoContatoClicado);
+            dashboardBackground.setCenter(edicaoRaiz);
+
+
+        } catch (Exception e) {
+            throw new RuntimeException("Não foi possivel trocar a tela atual para edição do contato. ",e);
+        }
+    }
 
     @FXML
     public void fecharDialogoLogout() {
@@ -142,5 +162,7 @@ public class DashBoardController implements Initializable {
         return this.dashboardBackground;
     }
 
-
+    public Usuario getUsuarioLogado() {
+        return usuarioLogado;
+    }
 }

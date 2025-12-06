@@ -1,5 +1,6 @@
 package com.thearckay.projetoagenda.model;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,10 +13,17 @@ public class Contato {
     private String email;
     private String localizacao;
     private Boolean favorito;
+    private LocalDate nascimento;
     private List<Nota> notas = new ArrayList<>();
 
     // construtores
     public Contato(){}
+
+    public Contato(String nome, String numeroTelefone, String email){
+        this.nomeCompleto=nome;
+        this.numeroTelefone=numeroTelefone;
+        this.email=email;
+    }
 
     public Contato(Integer usuarioId, String nomeCompleto, String numeroTelefone) {
         setUsuarioId(usuarioId);
@@ -30,22 +38,24 @@ public class Contato {
         setEmail(email);
     }
 
-    public Contato(Integer usuarioId, String nomeCompleto, String numeroTelefone, String email, String localizacao, Boolean favorito) {
+    public Contato(Integer usuarioId, String nomeCompleto, String numeroTelefone, String email, String localizacao, Boolean favorito, LocalDate dataNascimento) {
         setUsuarioId(usuarioId);
         setNomeCompleto(nomeCompleto);
         setNumeroTelefone(numeroTelefone);
         setEmail(email);
         setLocalizacao(localizacao);
         setFavorito(favorito);
+        setNascimento(dataNascimento);
     }
 
-    public Contato(Integer id, Integer usuarioId, String nomeCompleto, String numeroTelefone, String email, String localizacao, Boolean favorito) {
+    public Contato(Integer id, Integer usuarioId, String nomeCompleto, String numeroTelefone, String email, String localizacao, Boolean favorito, LocalDate dataNascimento) {
         this.id = id;
         this.usuarioId = usuarioId;
         this.nomeCompleto = nomeCompleto;
         this.numeroTelefone = numeroTelefone;
         this.email = email;
         this.localizacao = localizacao;
+        this.nascimento = dataNascimento;
         this.favorito = favorito;
     }
 
@@ -80,6 +90,10 @@ public class Contato {
 
     public List<Nota> getNotas() {
         return notas;
+    }
+
+    public LocalDate getNascimento() {
+        return nascimento;
     }
 
     // setters
@@ -117,6 +131,10 @@ public class Contato {
 
     public void adicionarNota(Nota nota) {
         this.notas.add(nota);
+    }
+
+    public void setNascimento(LocalDate nascimento) {
+        this.nascimento = nascimento;
     }
 
     @Override

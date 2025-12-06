@@ -5,6 +5,7 @@ import com.thearckay.projetoagenda.enums.StatusContato;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Agenda {
 
@@ -72,4 +73,25 @@ public class Agenda {
 
         return null;
     }
+
+    public void atualizarContato(Contato contatoAAtualizar){
+        contatoDAO.atualizarContato(contatoAAtualizar, this.usuarioDaAgenda.getId());
+        for (Contato c : this.usuarioDaAgenda.getAgenda().getAgendaContatos()) {
+            if (c.getId().equals(contatoAAtualizar.getId())) {
+                c.setNomeCompleto(contatoAAtualizar.getNomeCompleto());
+                c.setNumeroTelefone(contatoAAtualizar.getNumeroTelefone());
+                c.setEmail(contatoAAtualizar.getEmail());
+                c.setLocalizacao(contatoAAtualizar.getLocalizacao());
+                c.setFavorito(contatoAAtualizar.getFavorito());
+                c.setNascimento(contatoAAtualizar.getNascimento());
+                break;
+            }
+        }
+    }
+
+    public List<Contato> getContatosFavoritos(){
+        return this.agendaContatos.stream().filter(contato -> contato.getFavorito()).collect(Collectors.toList());
+    }
+
+
 }

@@ -6,6 +6,7 @@ import com.thearckay.projetoagenda.model.Contato;
 import com.thearckay.projetoagenda.model.Usuario;
 
 import java.sql.*;
+import java.time.LocalDate;
 
 public class ContatoDAO {
 
@@ -44,7 +45,7 @@ public class ContatoDAO {
 
         try(Connection conexao = FabricaConexao.conectar()){
 
-            String sqlInsertContato = "insert into contatos(usuario_id,nome_completo, numero_telefone, email, localizacao, favorito) values (?,?,?,?,?,?);";
+            String sqlInsertContato = "insert into contatos(usuario_id,nome_completo, numero_telefone, email, localizacao, favorito, data_nascimento) values (?,?,?,?,?,?,?);";
 
             PreparedStatement pstmt = conexao.prepareStatement(sqlInsertContato, Statement.RETURN_GENERATED_KEYS);
             pstmt.setInt(1, contatoASalvar.getUsuarioId());
@@ -53,6 +54,7 @@ public class ContatoDAO {
             pstmt.setString(4, contatoASalvar.getEmail());
             pstmt.setString(5, contatoASalvar.getLocalizacao());
             pstmt.setBoolean(6, contatoASalvar.getFavorito());
+            pstmt.setObject(7, contatoASalvar.getNascimento());
 
             pstmt.execute();
             ResultSet idGerado = pstmt.getGeneratedKeys();
@@ -89,6 +91,7 @@ public class ContatoDAO {
                 contato.setEmail(rs.getString("email"));
                 contato.setLocalizacao(rs.getString("localizacao"));
                 contato.setFavorito(rs.getBoolean("favorito"));
+                contato.setNascimento(rs.getObject("data_nascimento", LocalDate.class));
 
                 return contato;
             }
@@ -118,6 +121,7 @@ public class ContatoDAO {
                 contato.setEmail(rs.getString("email"));
                 contato.setLocalizacao(rs.getString("localizacao"));
                 contato.setFavorito(rs.getBoolean("favorito"));
+                contato.setNascimento(rs.getObject("data_nascimento", LocalDate.class));
 
                 return contato;
             }
@@ -128,7 +132,7 @@ public class ContatoDAO {
         }
     }
 
-    public StatusContato atualizarContato(Contato contato, Usuario usuario){
+    public StatusContato atualizarContato(Contato contato, Integer idUsuarioLogado){
 
         if (contato.getNomeCompleto() == null || contato.getNomeCompleto().isBlank()){
             return StatusContato.NOME_INVALIDO;
@@ -145,8 +149,8 @@ public class ContatoDAO {
         try (Connection conexao = FabricaConexao.conectar()){
             String sqlUpdateContato = "update contatos set" +
                     " nome_completo = ?, numero_telefone = ?," +
-                    " email = ?, localizacao = ?, favorito = ? " +
-                    "where id = ? and usuario_id = ?;";
+                    " email = ?, localizacao = ?, favorito = ?, " +
+                    "data_nascimento = ? where id = ? and usuario_id = ?;";
             ;
 
             PreparedStatement pstmt = conexao.prepareStatement(sqlUpdateContato);
@@ -155,10 +159,12 @@ public class ContatoDAO {
             pstmt.setString(3, contato.getEmail());
             pstmt.setString(4, contato.getLocalizacao());
             pstmt.setBoolean(5, contato.getFavorito());
+            pstmt.setObject(6, contato.getNascimento());
 
-            pstmt.setInt(6, contato.getId());
-            pstmt.setInt(7, usuario.getId());
+            pstmt.setInt(7, contato.getId());
+            pstmt.setInt(8, idUsuarioLogado);
 
+            System.out.println("Contato Salvo com sucesso!");
 
             pstmt.execute();
 

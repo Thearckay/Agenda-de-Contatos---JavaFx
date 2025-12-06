@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<AnchorPane prefHeight="700.0" prefWidth="800.0" style="-fx-background-color: transparent;" stylesheets="@../css/dashboard.css" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.thearckay.projetoagenda.controller.EditarContatoController">
+    <children>
+        <VBox layoutX="50.0" layoutY="50.0" spacing="25.0" style="-fx-background-color: white; -fx-background-radius: 15; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 5);" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="50.0">
+            <padding>
+                <Insets bottom="35.0" left="40.0" right="40.0" top="35.0" />
+            </padding>
+            <children>
+                <VBox spacing="5.0">
+                    <children>
+                        <Label text="Editar Contato" textFill="#1e1e2d">
+                            <font>
+                                <Font name="System Bold" size="24.0" />
+                            </font>
+                        </Label>
+                        <Label text="Edite as informações do Contato selecionado" textFill="#7d7d8d">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Label>
+                    </children>
+                </VBox>
+
+                <VBox spacing="18.0" VBox.vgrow="ALWAYS">
+                    <children>
+
+                        <VBox spacing="8.0">
+                            <children>
+                                <Label text="Nome" textFill="#1e1e2d">
+                                    <font><Font name="System Bold" size="14.0" /></font>
+                                </Label>
+                                <HBox alignment="CENTER_LEFT" spacing="10.0" style="-fx-background-color: #F5F5F7; -fx-background-radius: 8; -fx-border-color: #E0E0E0; -fx-border-radius: 8;">
+                                    <padding><Insets bottom="5.0" left="15.0" right="5.0" top="5.0" /></padding>
+                                    <children>
+                              <FontIcon iconLiteral="mdi2a-account" iconSize="25" />
+                                        <TextField fx:id="txtNome" promptText="Nome Completo" style="-fx-background-color: transparent; -fx-prompt-text-fill: #A0A0B0;" HBox.hgrow="ALWAYS">
+                                            <font><Font size="14.0" /></font>
+                                        </TextField>
+                                    </children>
+                                </HBox>
+                            </children>
+                        </VBox>
+
+                        <VBox spacing="8.0">
+                            <children>
+                                <Label text="Número de Telefone" textFill="#1e1e2d">
+                                    <font><Font name="System Bold" size="14.0" /></font>
+                                </Label>
+                                <HBox alignment="CENTER_LEFT" spacing="10.0" style="-fx-background-color: #F5F5F7; -fx-background-radius: 8; -fx-border-color: #E0E0E0; -fx-border-radius: 8;">
+                                    <padding><Insets bottom="5.0" left="15.0" right="5.0" top="5.0" /></padding>
+                                    <children>
+                              <FontIcon iconLiteral="mdi2p-phone" iconSize="25" />
+                                        <TextField fx:id="txtTelefone" promptText="(XX) XXXXX-XXXX" style="-fx-background-color: transparent; -fx-prompt-text-fill: #A0A0B0;" HBox.hgrow="ALWAYS">
+                                            <font><Font size="14.0" /></font>
+                                        </TextField>
+                                    </children>
+                                </HBox>
+                            </children>
+                        </VBox>
+
+                        <VBox spacing="8.0">
+                            <children>
+                                <Label text="Email" textFill="#1e1e2d">
+                                    <font><Font name="System Bold" size="14.0" /></font>
+                                </Label>
+                                <HBox alignment="CENTER_LEFT" spacing="10.0" style="-fx-background-color: #F5F5F7; -fx-background-radius: 8; -fx-border-color: #E0E0E0; -fx-border-radius: 8;">
+                                    <padding><Insets bottom="5.0" left="15.0" right="5.0" top="5.0" /></padding>
+                                    <children>
+                              <FontIcon iconLiteral="mdi2e-email" iconSize="25" />
+                                        <TextField fx:id="txtEmail" promptText="exemplo@email.com" style="-fx-background-color: transparent; -fx-prompt-text-fill: #A0A0B0;" HBox.hgrow="ALWAYS">
+                                            <font><Font size="14.0" /></font>
+                                        </TextField>
+                                    </children>
+                                </HBox>
+                            </children>
+                        </VBox>
+
+                        <VBox spacing="8.0">
+                            <children>
+                                <Label text="Localização" textFill="#1e1e2d">
+                                    <font><Font name="System Bold" size="14.0" /></font>
+                                </Label>
+                                <HBox alignment="CENTER_LEFT" spacing="10.0" style="-fx-background-color: #F5F5F7; -fx-background-radius: 8; -fx-border-color: #E0E0E0; -fx-border-radius: 8;">
+                                    <padding><Insets bottom="5.0" left="15.0" right="5.0" top="5.0" /></padding>
+                                    <children>
+                              <FontIcon iconLiteral="mdi2m-map-marker" iconSize="25" />
+                                        <TextField fx:id="txtLocalizacao" promptText="Cidade, Estado" style="-fx-background-color: transparent; -fx-prompt-text-fill: #A0A0B0;" HBox.hgrow="ALWAYS">
+                                            <font><Font size="14.0" /></font>
+                                        </TextField>
+                                    </children>
+                                </HBox>
+                            </children>
+                        </VBox>
+
+                        <VBox spacing="8.0">
+                            <children>
+                                <Label text="Data de Aniversário" textFill="#1e1e2d">
+                                    <font><Font name="System Bold" size="14.0" /></font>
+                                </Label>
+                                <DatePicker fx:id="dtAniversario" maxWidth="1.7976931348623157E308" promptText="mm/dd/yyyy" showWeekNumbers="false" style="-fx-background-color: #F5F5F7; -fx-border-color: #E0E0E0; -fx-border-radius: 8; -fx-background-radius: 8; -fx-control-inner-background: #F5F5F7; -fx-font-size: 14px;" />
+                            </children>
+                        </VBox>
+
+                        <CheckBox fx:id="cbFavorito" mnemonicParsing="false" text="Marcar como Favorito" textFill="#7d7d8d">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                            <VBox.margin>
+                                <Insets top="5.0" />
+                            </VBox.margin>
+                        </CheckBox>
+
+                    </children>
+                </VBox>
+
+                <HBox alignment="CENTER_RIGHT" spacing="15.0">
+                    <VBox.margin>
+                        <Insets top="10.0" />
+                    </VBox.margin>
+                    <children>
+                        <Region HBox.hgrow="ALWAYS" />
+                        <Button fx:id="btnCancelar" mnemonicParsing="false" onAction="#cancelarCadastro" style="-fx-background-color: #F0F0F5; -fx-text-fill: #1E1E2D; -fx-background-radius: 8; -fx-font-weight: bold; -fx-cursor: hand; -fx-border-color: #D0D0D5; -fx-border-radius: 8;" text="Cancelar">
+                            <padding>
+                                <Insets bottom="12.0" left="24.0" right="24.0" top="12.0" />
+                            </padding>
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Button>
+                        <Button fx:id="btnSalvar" mnemonicParsing="false" onAction="#salvarContato" style="-fx-background-color: #6A35E8; -fx-text-fill: white; -fx-background-radius: 8; -fx-font-weight: bold; -fx-cursor: hand;" text="Salvar Edições">
+                            <padding>
+                                <Insets bottom="12.0" left="24.0" right="24.0" top="12.0" />
+                            </padding>
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Button>
+                    </children>
+                </HBox>
+            </children>
+        </VBox>
+    </children>
+</AnchorPane>

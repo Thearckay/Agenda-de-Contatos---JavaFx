@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import org.kordamp.ikonli.javafx.*?>
+
+<VBox spacing="20.0" style="-fx-background-color: #F6F6F8;" stylesheets="@../css/dashboard.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.thearckay.projetoagenda.controller.ContatosExcluidosController">
+    <padding>
+        <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+    </padding>
+    <children>
+        <HBox alignment="CENTER_LEFT" spacing="20.0">
+            <children>
+                <VBox>
+                    <children>
+                        <Label text="Contatos Excluídos (Lixeira)" textFill="#1E1E2D">
+                            <font>
+                                <Font name="Segoe UI Bold" size="24.0" />
+                            </font>
+                        </Label>
+                        <Label text="Contatos removidos que podem ser restaurados ou excluídos permanentemente." textFill="#7D7D8D">
+                            <font>
+                                <Font name="Segoe UI" size="14.0" />
+                            </font>
+                        </Label>
+                    </children>
+                </VBox>
+                <Region HBox.hgrow="ALWAYS" />
+
+                <HBox alignment="CENTER_LEFT" style="-fx-background-color: WHITE; -fx-background-radius: 10; -fx-border-color: #E0E0E5; -fx-border-radius: 10;">
+                    <padding>
+                        <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
+                    </padding>
+                    <children>
+                        <Label text="🔍" textFill="#A0A0B0">
+                            <HBox.margin>
+                                <Insets right="5.0" />
+                            </HBox.margin>
+                        </Label>
+                        <TextField fx:id="txtPesquisarLixeira" promptText="Buscar na lixeira..." style="-fx-background-color: transparent; -fx-prompt-text-fill: #A0A0B0;" HBox.hgrow="ALWAYS">
+                            <font>
+                                <Font name="Segoe UI" size="13.0" />
+                            </font>
+                        </TextField>
+                    </children>
+                </HBox>
+
+                <Button fx:id="btnEsvaziarLixeira" mnemonicParsing="false" style="-fx-background-color: #FFEBEE; -fx-text-fill: #FF5555; -fx-background-radius: 10; -fx-cursor: hand; -fx-border-color: #FFCDD2; -fx-border-radius: 10;" text="Esvaziar Lixeira">
+                    <padding>
+                        <Insets bottom="10.0" left="15.0" right="15.0" top="10.0" />
+                    </padding>
+                    <font>
+                        <Font name="Segoe UI Bold" size="13.0" />
+                    </font>
+                    <graphic>
+                        <FontIcon iconColor="#FF5555" iconLiteral="mdi2t-trash-can" iconSize="18" />
+                    </graphic>
+                </Button>
+            </children>
+        </HBox>
+
+        <VBox style="-fx-background-color: WHITE; -fx-background-radius: 15; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.05), 10, 0, 0, 2);" VBox.vgrow="ALWAYS">
+            <children>
+
+                <HBox alignment="CENTER_LEFT" spacing="10.0" style="-fx-border-color: transparent transparent #F0F0F0 transparent; -fx-border-width: 1;">
+                    <padding>
+                        <Insets bottom="15.0" left="20.0" right="20.0" top="15.0" />
+                    </padding>
+                    <children>
+                        <Label maxWidth="Infinity" text="Nome" textFill="#A0A0B0" HBox.hgrow="ALWAYS">
+                            <font><Font name="Segoe UI Bold" size="12.0" /></font>
+                        </Label>
+
+                        <Label maxWidth="Infinity" text="Número de Telefone" textFill="#A0A0B0" HBox.hgrow="ALWAYS">
+                            <font><Font name="Segoe UI Bold" size="12.0" /></font>
+                        </Label>
+
+                        <Label maxWidth="Infinity" text="Endereço de Email" textFill="#A0A0B0" HBox.hgrow="ALWAYS">
+                            <font><Font name="Segoe UI Bold" size="12.0" /></font>
+                        </Label>
+
+                        <Label alignment="CENTER_RIGHT" minWidth="150.0" text="Ações" textFill="#A0A0B0">
+                            <font><Font name="Segoe UI Bold" size="12.0" /></font>
+                        </Label>
+                    </children>
+                </HBox>
+
+                <ListView fx:id="listaExcluidos" style="-fx-background-color: transparent; -fx-border-color: transparent;" VBox.vgrow="ALWAYS" />
+            </children>
+        </VBox>
+    </children>
+</VBox>

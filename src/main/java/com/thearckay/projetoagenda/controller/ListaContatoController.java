@@ -25,6 +25,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
 import java.net.URL;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 public class ListaContatoController implements Initializable {
@@ -38,10 +39,13 @@ public class ListaContatoController implements Initializable {
 
     @FXML private Label lblIniciaisGigantes;
     @FXML private Label lblNomeDetalhe;
+    @FXML private Label lblCargoDetalhe;
     @FXML private Label lblTelefoneDetalhe;
     @FXML private Label lblEmailDetalhe;
     @FXML private Label lblLocalizacaoDetalhe;
     @FXML private Label lblNascimentoDetalhe;
+
+    @FXML private Button btnEditarContato;
 
     // Fundo do Label dos detalhes
     @FXML private HBox bgTelefone;
@@ -64,13 +68,13 @@ public class ListaContatoController implements Initializable {
                 System.out.println("Clicado");
 
                 if (newValue != null){
-                    //TODO - as cores parecem funcionar quando setamos o estilo diretamente
 
                     lblNomeDetalhe.setStyle("-fx-text-fill: #5e25d9;");
                     lblTelefoneDetalhe.setStyle("-fx-text-fill: #444444; -fx-font-size: 12px;");
                     lblEmailDetalhe.setStyle("-fx-text-fill: #444444; -fx-font-size: 12px;");
                     lblLocalizacaoDetalhe.setStyle("-fx-text-fill: #444444; -fx-font-size: 12px;");
                     lblNascimentoDetalhe.setStyle("-fx-text-fill: #444444; -fx-font-size: 12px;");
+                    lblCargoDetalhe.setStyle("-fx-text-fill: #444444; -fx-font-size: 12px;");
 
                     String iniciais = "";
                     if (newValue.getNomeCompleto() != null && !newValue.getNomeCompleto().isEmpty()){
@@ -84,9 +88,25 @@ public class ListaContatoController implements Initializable {
 
                     lblIniciaisGigantes.setText(iniciais);
                     lblNomeDetalhe.setText(newValue.getNomeCompleto());
+                    lblCargoDetalhe.setText(newValue.getFavorito()? "Favoritado" : "Contato Pessoal");
                     lblTelefoneDetalhe.setText(newValue.getNumeroTelefone());
                     lblEmailDetalhe.setText(newValue.getEmail());
                     lblLocalizacaoDetalhe.setText(newValue.getLocalizacao());
+
+                    System.out.println("A data de aniversário é: "+ newValue.getNascimento()); // porque está vindo como null?
+                    System.out.println("O Id do contato é: "+newValue.getId());
+
+
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                    if (newValue.getNascimento() != null){
+
+                        String dataFormatada = newValue.getNascimento().format(formatter);
+                        lblNascimentoDetalhe.setText(dataFormatada);
+                    } else {
+                        lblNascimentoDetalhe.setText("Não informado");
+                    }
+
+
 
                     ultimoContatoClicado = newValue;
 
@@ -160,16 +180,19 @@ public class ListaContatoController implements Initializable {
     public void carregardadosNaLista(){
         Integer quantidadeContatos = usuarioLogado.getAgenda().getQuantidade();
         lblTotalContatos.setText("Lista de Contatos ("+quantidadeContatos+")");
+        criarCelulas();
 
         if (quantidadeContatos == 0){
             painelDetalhesContato.setVisible(false);
         }
 
+        //todo - fazendo teste para saber se tem data de nascimento (excluir dps)
         if (usuarioLogado.getAgenda() != null){
             ObservableList<Contato> agendaContatosObsl = FXCollections.observableArrayList(usuarioLogado.getAgenda().getAgendaContatos());
             listaContatos.setItems(agendaContatosObsl);
         }
     }
+
 
     public void setUsuarioLogado(Usuario usuarioLogado) {
         if (usuarioLogado != null){
@@ -181,7 +204,6 @@ public class ListaContatoController implements Initializable {
     @FXML
     private void excluirContato(){
         if (ultimoContatoClicado !=  null){
-            // todo - criar DELETE na agenda - assim fica atualizado
             this.usuarioLogado.getAgenda().removerContato(ultimoContatoClicado, this.usuarioLogado);
             dashBoard.abrirListaContatos();
         }
@@ -189,5 +211,10 @@ public class ListaContatoController implements Initializable {
 
     public void setDashBoard(DashBoardController dashBoardController){
         this.dashBoard = dashBoardController;
+    }
+
+    @FXML
+    public void abrirTelaEditarContato(){
+        dashBoard.abrirEdicaoDeContato(ultimoContatoClicado);
     }
 }

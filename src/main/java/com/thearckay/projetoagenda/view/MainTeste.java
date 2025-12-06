@@ -25,7 +25,7 @@ public class MainTeste {
         Usuario usuarioLogado = usuarioDAO.pegarUsuario("kayck.arcanjo@gmail.com", "12345678");
         System.out.println("Usuario logado ID: "+ usuarioLogado.getId());
 
-        Contato contato = new Contato(usuarioLogado.getId(), "Amigo 1", "00 000000001", "amigo@gmail.com", "BA", true );
+        Contato contato = new Contato(usuarioLogado.getId(), "Amigo 1", "00 000000001", "amigo@gmail.com", "BA", true , LocalDate.now());
         ContatoDAO contatoDAO = new ContatoDAO();
         contatoDAO.salvarContatoCompleto(contato);
         System.out.println("contato salvo, id: "+contato.getId());

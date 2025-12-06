@@ -59,10 +59,13 @@ insert into contatos (usuario_id,nome_completo, numero_telefone, email) values (
 
 -- completo
 insert into contatos(usuario_id,nome_completo, numero_telefone, email, localizacao, favorito) values (?,?,?,?,?,?);
+insert into contatos(usuario_id, nome_completo, numero_telefone, email, localizacao, favorito, data_nascimento) values (?,?,?,?,?,?,?)
 
 SELEC * FROM contatos WHERE numero_telefone = '';
 
 select * from contatos where usuario_id = ?;
+
+
 
 -- update
 update usuarios set nome_completo = ?, numero_telefone = ?, localizacao = ?, email = ?, senha = ?, data_aniversario = ? where id = ?;
@@ -79,7 +82,9 @@ values (7, 'Kayck Arcanjo', '00 000000000', 'kayck@gmail.com', 'BA', true);
 -- inserindo usuario:
 insert into usuarios (nome_completo, numero_telefone, localizacao, email, senha, data_aniversario, agenda);
 insert into usuarios (nome_completo, numero_telefone, localizacao, email, senha, data_aniversario)
-values ('Kayck Arcanjo', '73999199697', 'Belmonte, Bahia', 'k', 'k', '2005/03/08');]]></console>
+values ('Kayck Arcanjo', '73999199697', 'Belmonte, Bahia', 'k', 'k', '2005/03/08');
+
+alter table contatos add column data_nascimento;]]></console>
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseEditorStateManager">
@@ -87,7 +92,6 @@ values ('Kayck Arcanjo', '73999199697', 'Belmonte, Bahia', 'k', 'k', '2005/03/08
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
     <open-files>
-      <object connection-id="426cf143-291c-49cd-889b-c4fe316ce5c4" object-ref="consoles/inserindoDados" />
       <object connection-id="426cf143-291c-49cd-889b-c4fe316ce5c4" object-ref="consoles/Connection" />
     </open-files>
   </component>
@@ -102,7 +106,9 @@ values ('Kayck Arcanjo', '73999199697', 'Belmonte, Bahia', 'k', 'k', '2005/03/08
     <filters />
   </component>
   <component name="DBNavigator.Project.ScriptExecutionManager" clear-outputs="true">
-    <recently-used-interfaces />
+    <recently-used-interfaces>
+      <mapping database-type="MYSQL" interface-id="DEFAULT" />
+    </recently-used-interfaces>
   </component>
   <component name="DBNavigator.Project.Settings">
     <connections>

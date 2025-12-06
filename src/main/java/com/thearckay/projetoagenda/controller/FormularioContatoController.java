@@ -10,6 +10,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 
 import java.io.IOException;
+import java.time.LocalDate;
 
 public class FormularioContatoController {
 
@@ -55,9 +56,10 @@ public class FormularioContatoController {
         String numeroTelefone = txtTelefone.getText();
         String email = txtEmail.getText().isBlank()? "null": txtEmail.getText();
         String localizacao = txtLocalizacao.getText().isBlank()? "null": txtLocalizacao.getText();
+        LocalDate nascimento = dtAniversario.getValue();
         boolean favorito = cbFavorito.isSelected();
 
-        Contato novoContato = new Contato(idUsuario, nomeContato, numeroTelefone, email, localizacao, favorito);
+        Contato novoContato = new Contato(idUsuario, nomeContato, numeroTelefone, email, localizacao, favorito, nascimento);
         StatusContato status = usuarioLogado.getAgenda().adicionarContato(novoContato);
 
         if (status == StatusContato.SUCESSO) {
