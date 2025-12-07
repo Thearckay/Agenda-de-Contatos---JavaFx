@@ -69,7 +69,9 @@ select * from contatos where usuario_id = ?;
 
 -- update
 update usuarios set nome_completo = ?, numero_telefone = ?, localizacao = ?, email = ?, senha = ?, data_aniversario = ? where id = ?;
-update contatos set nome_completo = ?, numero_telefone = ?, email = ?, localizacao = ?, favorito = ? where id = ?;]]></console>
+update contatos set nome_completo = ?, numero_telefone = ?, email = ?, localizacao = ?, favorito = ? where id = ?;
+update contatos set nome_completo = ?, numero_telefone = ?, email = ?, localizacao = ?, favorito = ?, data_nascimento = ?, deletado = ? where id = ?;
+update contatos set deletado = ? where id = ? and usuario_id= ?]]></console>
       <console name="inserindoDados" type="STANDARD" schema="agenda_db" session="Pool"><![CDATA[use agenda_db;
 
 select * from contatos;
@@ -91,9 +93,7 @@ alter table contatos add column data_nascimento;]]></console>
     <last-used-providers />
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
-    <open-files>
-      <object connection-id="426cf143-291c-49cd-889b-c4fe316ce5c4" object-ref="consoles/Connection" />
-    </open-files>
+    <open-files />
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">
     <connection id="426cf143-291c-49cd-889b-c4fe316ce5c4" />

@@ -7,12 +7,17 @@
     -fx-text-fill: #A0A0B0; 
     -fx-cursor: hand;
     -fx-alignment: BASELINE_LEFT;
+    -fx-background-radius: 10;
+}
+
+.botaoMenu .ikonli-font-icon {
+    -fx-icon-color: #A0A0B0;
+    -fx-fill: #A0A0B0;
 }
 
 .botaoMenu:hover {
-    -fx-background-color: #6A35E8;
-    -fx-text-fill: A0A0B0;
-    -fx-background-radius: 8;
+    -fx-background-color: #6A35E8; 
+    -fx-text-fill: white; 
 }
 
 .botaoMenu:hover .ikonli-font-icon {
@@ -74,3 +79,4 @@
     -fx-text-fill: white;
     -fx-background-radius: 8;
 }
+

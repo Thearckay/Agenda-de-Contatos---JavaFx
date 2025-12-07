@@ -32,8 +32,7 @@ public class Agenda {
 
     public StatusContato removerContato(Contato contatoARemover, Usuario usuarioLogado){
         StatusContato status = contatoDAO.deletarContato(contatoARemover, usuarioLogado);
-        agendaContatos.remove(contatoARemover);
-
+        contatoARemover.setDeletado(true);
         return status;
     }
 
@@ -62,7 +61,24 @@ public class Agenda {
     }
 
     public Integer getQuantidade(){
-        return agendaContatos.size();
+        return (int) this.agendaContatos.stream()
+                .filter(contato -> !Boolean.TRUE.equals(contato.getDeletado()))
+                .count()
+        ;
+    }
+
+    public void restaurarContato(Contato contato) {
+        contato.setDeletado(false);
+        contatoDAO.atualizarContato(contato, this.usuarioDaAgenda.getId());
+    }
+
+    public StatusContato excluirDefinitivamente(Contato contato) {
+        StatusContato status = contatoDAO.deletarContatoDoBancoDeDados(contato, usuarioDaAgenda);
+        if (status == StatusContato.SUCESSO) {
+            this.agendaContatos.remove(contato);
+        }
+
+        return status;
     }
 
     public StatusContato adicionarNovoContato(Contato novoContato) {
@@ -90,8 +106,20 @@ public class Agenda {
     }
 
     public List<Contato> getContatosFavoritos(){
-        return this.agendaContatos.stream().filter(contato -> contato.getFavorito()).collect(Collectors.toList());
+        return this.agendaContatos.stream().filter(contato -> contato.getFavorito() && contato.getDeletado() == false).collect(Collectors.toList());
     }
 
+    public List<Contato> getContatosDeletados(){
+        return this.agendaContatos.stream()
+                .filter(contato -> Boolean.TRUE.equals(contato.getDeletado())) // Só TRUE passa
+                .collect(Collectors.toList());
+    }
+
+    public List<Contato> getTodosContatos() {
+        return this.agendaContatos.stream()
+                .filter(contato -> !Boolean.TRUE.equals(contato.getDeletado()))
+                .collect(Collectors.toList())
+        ;
+    }
 
 }

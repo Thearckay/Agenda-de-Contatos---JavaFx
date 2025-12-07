@@ -32,7 +32,6 @@ public class ListaContatoController implements Initializable {
 
     private Usuario usuarioLogado;
     private DashBoardController dashBoard;
-    private final ContatoDAO daoContato = new ContatoDAO();
     @FXML private Label lblTotalContatos;
     @FXML private ListView<Contato> listaContatos;
     @FXML private VBox painelDetalhesContato;
@@ -188,7 +187,7 @@ public class ListaContatoController implements Initializable {
 
         //todo - fazendo teste para saber se tem data de nascimento (excluir dps)
         if (usuarioLogado.getAgenda() != null){
-            ObservableList<Contato> agendaContatosObsl = FXCollections.observableArrayList(usuarioLogado.getAgenda().getAgendaContatos());
+            ObservableList<Contato> agendaContatosObsl = FXCollections.observableArrayList(usuarioLogado.getAgenda().getTodosContatos());
             listaContatos.setItems(agendaContatosObsl);
         }
     }

@@ -74,6 +74,18 @@ public class DashBoardController implements Initializable {
     @FXML
     private void abrirContatosExluidos(){
         selecionarBotao(btnLixeira);
+        try{
+            FXMLLoader excluidosLoader = new FXMLLoader(getClass().getResource("/com/thearckay/projetoagenda/fxml/ContatosExcluidos.fxml"));
+            Parent rootExluidos = excluidosLoader.load();
+            ContatosExcluidosController controller = excluidosLoader.getController();
+
+            controller.setDashBoard(this);
+            controller.setUsuarioLogado(usuarioLogado);
+            dashboardBackground.setCenter(rootExluidos);
+
+        } catch (Exception e) {
+            throw new RuntimeException("Erro ao tentar abrir a tela dos contatos excluidos"+e);
+        }
     }
 
     private void selecionarBotao(Button botao){

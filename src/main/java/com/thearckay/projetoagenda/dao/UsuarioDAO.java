@@ -116,6 +116,7 @@ public class UsuarioDAO {
                             contato.setEmail(rsAgenda.getString("email"));
                             contato.setLocalizacao(rsAgenda.getString("localizacao"));
                             contato.setFavorito(rsAgenda.getBoolean("favorito"));
+                            contato.setDeletado(rsAgenda.getBoolean("deletado"));
 
                             agenda.carregarContatoDoBanco(contato);
 

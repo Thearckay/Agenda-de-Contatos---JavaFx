@@ -45,7 +45,7 @@ public class ContatoDAO {
 
         try(Connection conexao = FabricaConexao.conectar()){
 
-            String sqlInsertContato = "insert into contatos(usuario_id,nome_completo, numero_telefone, email, localizacao, favorito, data_nascimento) values (?,?,?,?,?,?,?);";
+            String sqlInsertContato = "insert into contatos(usuario_id,nome_completo, numero_telefone, email, localizacao, favorito, data_nascimento, deletado) values (?,?,?,?,?,?,?, ?);";
 
             PreparedStatement pstmt = conexao.prepareStatement(sqlInsertContato, Statement.RETURN_GENERATED_KEYS);
             pstmt.setInt(1, contatoASalvar.getUsuarioId());
@@ -55,6 +55,7 @@ public class ContatoDAO {
             pstmt.setString(5, contatoASalvar.getLocalizacao());
             pstmt.setBoolean(6, contatoASalvar.getFavorito());
             pstmt.setObject(7, contatoASalvar.getNascimento());
+            pstmt.setBoolean(8, contatoASalvar.getDeletado());
 
             pstmt.execute();
             ResultSet idGerado = pstmt.getGeneratedKeys();
@@ -150,7 +151,7 @@ public class ContatoDAO {
             String sqlUpdateContato = "update contatos set" +
                     " nome_completo = ?, numero_telefone = ?," +
                     " email = ?, localizacao = ?, favorito = ?, " +
-                    "data_nascimento = ? where id = ? and usuario_id = ?;";
+                    "data_nascimento = ?, deletado = ? where id = ? and usuario_id = ?;";
             ;
 
             PreparedStatement pstmt = conexao.prepareStatement(sqlUpdateContato);
@@ -160,9 +161,10 @@ public class ContatoDAO {
             pstmt.setString(4, contato.getLocalizacao());
             pstmt.setBoolean(5, contato.getFavorito());
             pstmt.setObject(6, contato.getNascimento());
+            pstmt.setBoolean(7, contato.getDeletado());
 
-            pstmt.setInt(7, contato.getId());
-            pstmt.setInt(8, idUsuarioLogado);
+            pstmt.setInt(8, contato.getId());
+            pstmt.setInt(9, idUsuarioLogado);
 
             System.out.println("Contato Salvo com sucesso!");
 
@@ -176,6 +178,31 @@ public class ContatoDAO {
     }
 
     public StatusContato deletarContato(Contato contato, Usuario usuarioLogado){
+        if (contato.getId() == null){
+            return StatusContato.ID_INVALIDO;
+        }
+
+        System.out.println("O id do contato é válido para deletar: "+contato.getId());
+        System.out.println("Nome: "+contato.getNomeCompleto());
+        System.out.println("Deletado: "+contato.getDeletado());
+
+        try (Connection conexao = FabricaConexao.conectar()) {
+            String sqlDeleteContato = "update contatos set deletado = true where id = ? and usuario_id= ?";
+
+            PreparedStatement pstmt = conexao.prepareStatement(sqlDeleteContato);
+            pstmt.setInt(1, contato.getId());
+            pstmt.setInt(2, usuarioLogado.getId());
+
+            pstmt.execute();
+            return StatusContato.SUCESSO;
+
+        } catch (Exception e) {
+            throw new RuntimeException("Erro ao tentar deletar o contato: "+e);
+        }
+    }
+
+
+    public StatusContato deletarContatoDoBancoDeDados(Contato contato, Usuario usuarioLogado){
         if (contato.getId() == null){
             return StatusContato.ID_INVALIDO;
         }
@@ -194,4 +221,5 @@ public class ContatoDAO {
             throw new RuntimeException("Erro ao tentar deletar o contato: "+e);
         }
     }
+
 }

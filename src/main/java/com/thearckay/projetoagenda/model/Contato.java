@@ -14,6 +14,7 @@ public class Contato {
     private String localizacao;
     private Boolean favorito;
     private LocalDate nascimento;
+    private Boolean deletado;
     private List<Nota> notas = new ArrayList<>();
 
     // construtores
@@ -96,6 +97,14 @@ public class Contato {
         return nascimento;
     }
 
+    public Boolean getDeletado() {
+        if (this.deletado == null){
+            return false;
+        }
+
+        return deletado;
+    }
+
     // setters
     public void setId(Integer id) {
         this.id = id;
@@ -135,6 +144,10 @@ public class Contato {
 
     public void setNascimento(LocalDate nascimento) {
         this.nascimento = nascimento;
+    }
+
+    public void setDeletado(Boolean deletado) {
+        this.deletado = deletado;
     }
 
     @Override

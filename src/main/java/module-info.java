@@ -6,6 +6,7 @@ module com.thearckay.projetoagenda {
     requires java.desktop;
     requires javafx.base;
     requires javafx.graphics;
+    requires org.kordamp.ikonli.javafx;
 
 
     opens com.thearckay.projetoagenda to javafx.fxml;
