@@ -7,6 +7,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,10 +15,7 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
+import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -35,6 +33,7 @@ public class ListaContatoController implements Initializable {
     @FXML private Label lblTotalContatos;
     @FXML private ListView<Contato> listaContatos;
     @FXML private VBox painelDetalhesContato;
+    @FXML private TextField txtPesquisar;
 
     @FXML private Label lblIniciaisGigantes;
     @FXML private Label lblNomeDetalhe;
@@ -179,6 +178,7 @@ public class ListaContatoController implements Initializable {
     public void carregardadosNaLista(){
         Integer quantidadeContatos = usuarioLogado.getAgenda().getQuantidade();
         lblTotalContatos.setText("Lista de Contatos ("+quantidadeContatos+")");
+
         criarCelulas();
 
         if (quantidadeContatos == 0){
@@ -188,7 +188,27 @@ public class ListaContatoController implements Initializable {
         //todo - fazendo teste para saber se tem data de nascimento (excluir dps)
         if (usuarioLogado.getAgenda() != null){
             ObservableList<Contato> agendaContatosObsl = FXCollections.observableArrayList(usuarioLogado.getAgenda().getTodosContatos());
-            listaContatos.setItems(agendaContatosObsl);
+            FilteredList<Contato> dadosFiltrados = new FilteredList<>(agendaContatosObsl, b -> true);
+            txtPesquisar.textProperty().addListener((observable, oldValue, newValue) -> {
+                dadosFiltrados.setPredicate(contato -> {
+                    if (newValue == null || newValue.isEmpty()) {
+                        return true;
+                    }
+
+                    String textoDigitado = newValue.toLowerCase();
+
+                    if (contato.getNomeCompleto().toLowerCase().contains(textoDigitado)) {
+                        return true;
+                    } else if (contato.getNumeroTelefone().contains(textoDigitado)) {
+                        return true;
+                    } else if (contato.getEmail().toLowerCase().contains(textoDigitado)) {
+                        return true;
+                    }
+
+                    return false;
+                });
+            });
+            listaContatos.setItems(dadosFiltrados);
         }
     }
 

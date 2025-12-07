@@ -93,6 +93,12 @@ public class ContatosExcluidosController implements Initializable {
         });
     }
 
+    @FXML
+    private void btnEsvaziarLixeira(){
+        usuarioLogado.getAgenda().apagarContatosDeletadosPermanentemente(usuarioLogado);
+        carregarContatosExcluidos();
+    }
+
     private void restaurarContato(Contato contato) {
         if (usuarioLogado != null && usuarioLogado.getAgenda() != null) {
             usuarioLogado.getAgenda().restaurarContato(contato);

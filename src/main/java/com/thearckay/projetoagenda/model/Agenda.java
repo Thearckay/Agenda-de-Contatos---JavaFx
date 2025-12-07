@@ -122,4 +122,14 @@ public class Agenda {
         ;
     }
 
+    public void apagarContatosDeletadosPermanentemente(Usuario usuarioLogado){
+
+        List<Contato> paraExcluir = this.agendaContatos.stream()
+                .filter(c -> Boolean.TRUE.equals(c.getDeletado()))
+                .collect(Collectors.toList())
+        ;
+        paraExcluir.stream().forEach(contato -> contatoDAO.deletarContatoDoBancoDeDados(contato, usuarioLogado));
+        agendaContatos.removeAll(paraExcluir);
+    }
+
 }
