@@ -1,6 +1,8 @@
 package com.thearckay.projetoagenda.model;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Usuario {
 
@@ -58,6 +60,7 @@ public class Usuario {
     public Agenda getAgenda() {
         return agenda;
     }
+
 
     // setters
     public void setId(Integer id) {

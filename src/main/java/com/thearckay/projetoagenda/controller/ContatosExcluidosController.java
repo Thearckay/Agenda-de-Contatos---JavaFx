@@ -4,6 +4,8 @@ import com.thearckay.projetoagenda.dao.ContatoDAO;
 import com.thearckay.projetoagenda.model.Contato;
 import com.thearckay.projetoagenda.model.Usuario;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.scene.control.*;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -102,14 +104,14 @@ public class ContatosExcluidosController implements Initializable {
     private void restaurarContato(Contato contato) {
         if (usuarioLogado != null && usuarioLogado.getAgenda() != null) {
             usuarioLogado.getAgenda().restaurarContato(contato);
-            listaExcluidos.getItems().remove(contato);
+            carregarContatosExcluidos();
         }
     }
 
     private void deletarDefinitivamente(Contato contato) {
         if (usuarioLogado != null && usuarioLogado.getAgenda() != null) {
             usuarioLogado.getAgenda().excluirDefinitivamente(contato);
-            listaExcluidos.getItems().remove(contato);
+            carregarContatosExcluidos();
         }
     }
 
@@ -124,8 +126,29 @@ public class ContatosExcluidosController implements Initializable {
 
     private void carregarContatosExcluidos() {
         if (usuarioLogado != null) {
-            List<Contato> excluidos = usuarioLogado.getAgenda().getContatosDeletados();
-            listaExcluidos.setItems(FXCollections.observableArrayList(excluidos));
+            ObservableList<Contato> exluidosObsl = FXCollections.observableArrayList(usuarioLogado.getAgenda().getContatosExcluidos());
+            FilteredList<Contato> listaFiltrada = new FilteredList<>(exluidosObsl, contato -> true);
+            listaExcluidos.setItems(listaFiltrada);
+            txtPesquisarLixeira.textProperty().addListener((observable, oldValue, digitado) ->{
+                listaFiltrada.setPredicate(contato -> {
+
+                    if (digitado == null || digitado.isEmpty()){
+                        return true;
+                    }
+
+                    String textoDigitado = digitado.toLowerCase();
+
+                    if (contato.getNumeroTelefone().contains(textoDigitado)){
+                        return true;
+                    } else if (contato.getNomeCompleto().toLowerCase().contains(textoDigitado)){
+                        return true;
+                    } else if (contato.getEmail().toLowerCase().contains(textoDigitado)){
+                        return true;
+                    }
+
+                    return false;
+                });
+            });
         }
     }
 }

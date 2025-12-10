@@ -3,18 +3,17 @@ package com.thearckay.projetoagenda.controller;
 import com.thearckay.projetoagenda.model.Contato;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
-import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.GridPane;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
-
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -22,6 +21,7 @@ public class ContatosFavoritosController implements Initializable {
 
     private DashBoardController dashBoardController;
     @FXML private ListView listaFavoritos;
+    @FXML private TextField txtPesquisarFavoritos;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -39,11 +39,6 @@ public class ContatosFavoritosController implements Initializable {
                     return;
                 }
 
-                // ----- Linha com 3 colunas -----
-                // HBox alinhado igual ao cabeçalho
-                // ============================
-                // 1. Criar avatar com iniciais
-                // ============================
                 String iniciais = "";
                 if (contato.getNomeCompleto() != null && !contato.getNomeCompleto().isEmpty()) {
                     String[] partes = contato.getNomeCompleto().trim().split("\\s+");
@@ -61,10 +56,7 @@ public class ContatosFavoritosController implements Initializable {
                 avatar.setMinWidth(40);
                 avatar.setMaxWidth(40);
 
-                // ============================
-                // 2. Colunas alinhadas ao cabeçalho
-                // ============================
-                HBox linha = new HBox(20); // um pouco mais de espaço por causa do avatar
+                HBox linha = new HBox(20);
                 linha.setStyle("-fx-padding: 10 20; -fx-alignment: center-left;");
 
                 Label lblNome = new Label(contato.getNomeCompleto());
@@ -85,11 +77,12 @@ public class ContatosFavoritosController implements Initializable {
                 // ============================
                 // 3. Montar a linha completa
                 // ============================
+
                 linha.getChildren().addAll(
-                        avatar,      // Avatar no início
-                        lblNome,     // 1ª coluna
-                        lblTelefone, // 2ª coluna
-                        lblEmail     // 3ª coluna
+                        avatar,
+                        lblNome,
+                        lblTelefone,
+                        lblEmail
                 );
 
                 setGraphic(linha);
@@ -99,7 +92,28 @@ public class ContatosFavoritosController implements Initializable {
 
     public void carregarDados(){
         ObservableList<Contato> listaVivaDeContato = FXCollections.observableArrayList(this.dashBoardController.getUsuarioLogado().getAgenda().getContatosFavoritos());
-        listaFavoritos.getItems().addAll(listaVivaDeContato);
+        FilteredList<Contato> listaFiltada  = new FilteredList<>(listaVivaDeContato, contato -> true);
+        txtPesquisarFavoritos.textProperty().addListener((observable, oldValue, contatoDigitado) -> {
+            listaFiltada.setPredicate(contato -> {
+                if (contatoDigitado == null || contatoDigitado.isEmpty()){
+                    return true;
+                }
+
+                String textoDigitado = contatoDigitado.toLowerCase();
+
+                if (contato.getNomeCompleto().toLowerCase().contains(textoDigitado)){
+                    return true;
+                } else if (contato.getNumeroTelefone().contains(textoDigitado)) {
+                    return true;
+                } else if (contato.getEmail().toLowerCase().contains(textoDigitado)) {
+                    return true;
+                }
+
+                return false;
+            });
+
+        });
+        listaFavoritos.setItems(listaFiltada);
     }
 
 

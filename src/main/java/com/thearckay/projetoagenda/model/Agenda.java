@@ -132,4 +132,10 @@ public class Agenda {
         agendaContatos.removeAll(paraExcluir);
     }
 
+    public List<Contato> getContatosExcluidos(){
+        List<Contato> contatosExluidos = new ArrayList<>();
+        contatosExluidos.addAll(getAgendaContatos().stream().filter(contato -> contato.getDeletado() == true).collect(Collectors.toList()));
+        return contatosExluidos;
+    }
+
 }

@@ -29,7 +29,7 @@
                 </VBox>
                 <Region HBox.hgrow="ALWAYS" />
 
-                <HBox alignment="CENTER_LEFT" style="-fx-background-color: WHITE; -fx-background-radius: 20; -fx-border-color: #E0E0E5; -fx-border-radius: 20;">
+                <HBox fx:id="barraDePesquisa" alignment="CENTER_LEFT" style="-fx-background-color: WHITE; -fx-background-radius: 20; -fx-border-color: #E0E0E5; -fx-border-radius: 20;">
                     <padding>
                         <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
                     </padding>

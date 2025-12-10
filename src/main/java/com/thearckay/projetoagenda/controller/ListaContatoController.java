@@ -1,6 +1,5 @@
 package com.thearckay.projetoagenda.controller;
 
-import com.thearckay.projetoagenda.dao.ContatoDAO;
 import com.thearckay.projetoagenda.model.Contato;
 import com.thearckay.projetoagenda.model.Usuario;
 import javafx.beans.value.ChangeListener;
@@ -91,7 +90,7 @@ public class ListaContatoController implements Initializable {
                     lblEmailDetalhe.setText(newValue.getEmail());
                     lblLocalizacaoDetalhe.setText(newValue.getLocalizacao());
 
-                    System.out.println("A data de aniversário é: "+ newValue.getNascimento()); // porque está vindo como null?
+                    System.out.println("A data de aniversário é: "+ newValue.getNascimento());
                     System.out.println("O Id do contato é: "+newValue.getId());
 
 
@@ -104,8 +103,6 @@ public class ListaContatoController implements Initializable {
                         lblNascimentoDetalhe.setText("Não informado");
                     }
 
-
-
                     ultimoContatoClicado = newValue;
 
                 }
@@ -116,10 +113,10 @@ public class ListaContatoController implements Initializable {
     public void criarCelulas(){
         listaContatos.setCellFactory(param -> new ListCell<Contato>(){
             @Override
-            protected void updateItem(Contato contato, boolean b) {
-                super.updateItem(contato, b);
+            protected void updateItem(Contato contato, boolean empty) {
+                super.updateItem(contato, empty);
 
-                if (b || contato == null){
+                if (empty || contato == null){
                     setText(null);
                     setGraphic(null);
                 } else {
@@ -185,17 +182,16 @@ public class ListaContatoController implements Initializable {
             painelDetalhesContato.setVisible(false);
         }
 
-        //todo - fazendo teste para saber se tem data de nascimento (excluir dps)
         if (usuarioLogado.getAgenda() != null){
             ObservableList<Contato> agendaContatosObsl = FXCollections.observableArrayList(usuarioLogado.getAgenda().getTodosContatos());
             FilteredList<Contato> dadosFiltrados = new FilteredList<>(agendaContatosObsl, b -> true);
-            txtPesquisar.textProperty().addListener((observable, oldValue, newValue) -> {
+            txtPesquisar.textProperty().addListener((observable, oldValue, contatoSelecionado) -> {
                 dadosFiltrados.setPredicate(contato -> {
-                    if (newValue == null || newValue.isEmpty()) {
+                    if (contatoSelecionado == null || contatoSelecionado.isEmpty()) {
                         return true;
                     }
 
-                    String textoDigitado = newValue.toLowerCase();
+                    String textoDigitado = contatoSelecionado.toLowerCase();
 
                     if (contato.getNomeCompleto().toLowerCase().contains(textoDigitado)) {
                         return true;
