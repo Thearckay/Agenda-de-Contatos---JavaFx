@@ -1,6 +1,5 @@
 package com.thearckay.projetoagenda.controller;
 
-import com.thearckay.projetoagenda.dao.ContatoDAO;
 import com.thearckay.projetoagenda.model.Contato;
 import com.thearckay.projetoagenda.model.Usuario;
 import javafx.collections.FXCollections;
@@ -27,7 +26,6 @@ public class ContatosExcluidosController implements Initializable {
 
     private Usuario usuarioLogado;
     private DashBoardController dashBoard;
-    private final ContatoDAO contatoDAO = new ContatoDAO();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

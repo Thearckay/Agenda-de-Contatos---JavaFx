@@ -74,10 +74,6 @@ public class ContatosFavoritosController implements Initializable {
                 HBox.setHgrow(lblEmail, javafx.scene.layout.Priority.ALWAYS);
                 lblEmail.setMaxWidth(Double.MAX_VALUE);
 
-                // ============================
-                // 3. Montar a linha completa
-                // ============================
-
                 linha.getChildren().addAll(
                         avatar,
                         lblNome,

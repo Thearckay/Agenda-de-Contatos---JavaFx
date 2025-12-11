@@ -2,12 +2,9 @@ package com.thearckay.projetoagenda.controller;
 
 import com.thearckay.projetoagenda.model.Contato;
 import com.thearckay.projetoagenda.model.Usuario;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -42,14 +39,6 @@ public class ListaContatoController implements Initializable {
     @FXML private Label lblLocalizacaoDetalhe;
     @FXML private Label lblNascimentoDetalhe;
 
-    @FXML private Button btnEditarContato;
-
-    // Fundo do Label dos detalhes
-    @FXML private HBox bgTelefone;
-    @FXML private HBox bgEmail;
-    @FXML private HBox bgLocalizacao;
-    @FXML private HBox bgAniversario;
-
     private Contato ultimoContatoClicado;
 
     @Override
@@ -59,59 +48,56 @@ public class ListaContatoController implements Initializable {
     }
 
     public void selecionarCelula(){
-        listaContatos.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Contato>() {
-            @Override
-            public void changed(ObservableValue<? extends Contato> observableValue, Contato oldValue, Contato newValue) {
-                System.out.println("Clicado");
+        listaContatos.getSelectionModel().selectedItemProperty().addListener((_, _, newValue) -> {
+            System.out.println("Clicado");
 
-                if (newValue != null){
+            if (newValue != null) {
 
-                    lblNomeDetalhe.setStyle("-fx-text-fill: #5e25d9;");
-                    lblTelefoneDetalhe.setStyle("-fx-text-fill: #444444; -fx-font-size: 12px;");
-                    lblEmailDetalhe.setStyle("-fx-text-fill: #444444; -fx-font-size: 12px;");
-                    lblLocalizacaoDetalhe.setStyle("-fx-text-fill: #444444; -fx-font-size: 12px;");
-                    lblNascimentoDetalhe.setStyle("-fx-text-fill: #444444; -fx-font-size: 12px;");
-                    lblCargoDetalhe.setStyle("-fx-text-fill: #444444; -fx-font-size: 12px;");
+                lblNomeDetalhe.setStyle("-fx-text-fill: #5e25d9;");
+                lblTelefoneDetalhe.setStyle("-fx-text-fill: #444444; -fx-font-size: 12px;");
+                lblEmailDetalhe.setStyle("-fx-text-fill: #444444; -fx-font-size: 12px;");
+                lblLocalizacaoDetalhe.setStyle("-fx-text-fill: #444444; -fx-font-size: 12px;");
+                lblNascimentoDetalhe.setStyle("-fx-text-fill: #444444; -fx-font-size: 12px;");
+                lblCargoDetalhe.setStyle("-fx-text-fill: #444444; -fx-font-size: 12px;");
 
-                    String iniciais = "";
-                    if (newValue.getNomeCompleto() != null && !newValue.getNomeCompleto().isEmpty()){
-                        String[] partes = newValue.getNomeCompleto().trim().split("\\s+");
+                String iniciais = "";
+                if (newValue.getNomeCompleto() != null && !newValue.getNomeCompleto().isEmpty()) {
+                    String[] partes = newValue.getNomeCompleto().trim().split("\\s+");
 
-                        if (partes.length > 0) iniciais += partes[0].substring(0,1);
-                        if (partes.length > 1) iniciais += partes[partes.length - 1].substring(0,1);
-                    }
-
-                    painelDetalhesContato.setVisible(true);
-
-                    lblIniciaisGigantes.setText(iniciais);
-                    lblNomeDetalhe.setText(newValue.getNomeCompleto());
-                    lblCargoDetalhe.setText(newValue.getFavorito()? "Favoritado" : "Contato Pessoal");
-                    lblTelefoneDetalhe.setText(newValue.getNumeroTelefone());
-                    lblEmailDetalhe.setText(newValue.getEmail());
-                    lblLocalizacaoDetalhe.setText(newValue.getLocalizacao());
-
-                    System.out.println("A data de aniversário é: "+ newValue.getNascimento());
-                    System.out.println("O Id do contato é: "+newValue.getId());
-
-
-                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-                    if (newValue.getNascimento() != null){
-
-                        String dataFormatada = newValue.getNascimento().format(formatter);
-                        lblNascimentoDetalhe.setText(dataFormatada);
-                    } else {
-                        lblNascimentoDetalhe.setText("Não informado");
-                    }
-
-                    ultimoContatoClicado = newValue;
-
+                    if (partes.length > 0) iniciais += partes[0].substring(0, 1);
+                    if (partes.length > 1) iniciais += partes[partes.length - 1].substring(0, 1);
                 }
+
+                painelDetalhesContato.setVisible(true);
+
+                lblIniciaisGigantes.setText(iniciais);
+                lblNomeDetalhe.setText(newValue.getNomeCompleto());
+                lblCargoDetalhe.setText(newValue.getFavorito() ? "Favoritado" : "Contato Pessoal");
+                lblTelefoneDetalhe.setText(newValue.getNumeroTelefone());
+                lblEmailDetalhe.setText(newValue.getEmail());
+                lblLocalizacaoDetalhe.setText(newValue.getLocalizacao());
+
+                System.out.println("A data de aniversário é: " + newValue.getNascimento());
+                System.out.println("O Id do contato é: " + newValue.getId());
+
+
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                if (newValue.getNascimento() != null) {
+
+                    String dataFormatada = newValue.getNascimento().format(formatter);
+                    lblNascimentoDetalhe.setText(dataFormatada);
+                } else {
+                    lblNascimentoDetalhe.setText("Não informado");
+                }
+
+                ultimoContatoClicado = newValue;
+
             }
         });
     }
 
     public void criarCelulas(){
-        listaContatos.setCellFactory(param -> new ListCell<Contato>(){
+        listaContatos.setCellFactory(_ -> new ListCell<>(){
             @Override
             protected void updateItem(Contato contato, boolean empty) {
                 super.updateItem(contato, empty);
@@ -156,7 +142,7 @@ public class ListaContatoController implements Initializable {
         });
     }
 
-    public void abrirFormularioAddContato(ActionEvent actionEvent) {
+    public void abrirFormularioAddContato() {
         try{
             FXMLLoader contatoCadastroLoader = new FXMLLoader(getClass().getResource("/com/thearckay/projetoagenda/fxml/FormularioCadastro.fxml"));
             Parent telaContato = contatoCadastroLoader.load();
@@ -184,8 +170,8 @@ public class ListaContatoController implements Initializable {
 
         if (usuarioLogado.getAgenda() != null){
             ObservableList<Contato> agendaContatosObsl = FXCollections.observableArrayList(usuarioLogado.getAgenda().getTodosContatos());
-            FilteredList<Contato> dadosFiltrados = new FilteredList<>(agendaContatosObsl, b -> true);
-            txtPesquisar.textProperty().addListener((observable, oldValue, contatoSelecionado) -> {
+            FilteredList<Contato> dadosFiltrados = new FilteredList<>(agendaContatosObsl, _ -> true);
+            txtPesquisar.textProperty().addListener((_, _, contatoSelecionado) -> {
                 dadosFiltrados.setPredicate(contato -> {
                     if (contatoSelecionado == null || contatoSelecionado.isEmpty()) {
                         return true;

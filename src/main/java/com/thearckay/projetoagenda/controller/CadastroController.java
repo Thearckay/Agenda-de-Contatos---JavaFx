@@ -58,8 +58,6 @@ public class CadastroController {
             return;
         }
 
-        // Validação nome
-
         if (nomeCompleto.trim().contains(" ")){
             System.out.println("Contém sobrenome");
 
@@ -68,7 +66,6 @@ public class CadastroController {
             return;
         }
 
-        // Validação numero
         int numeroSemEspaco = numeroTelefone.trim().replace(" ", "").length();
 
         if ( numeroSemEspaco != 14){
@@ -78,7 +75,7 @@ public class CadastroController {
             System.out.println("O número tem 14 digitos");
         }
 
-        // Validaçao localização
+
         String localizacaoSemVirgula = localizacao.trim().replace(",", "");
         if (localizacaoSemVirgula.isBlank()){
             enviarNotificacaoDesktop("Informe sua localização", "Informe a localização seguindo o padrão: Cidade, Estado");
@@ -93,7 +90,6 @@ public class CadastroController {
             System.out.println("Campo data preenchido");
         }
 
-        // Validação Email
         if (!email.trim().contains("@")){
             enviarNotificacaoDesktop("Email inválido", "Informe um email válido para prosseguir com o cadastro");
             return;
@@ -106,7 +102,7 @@ public class CadastroController {
             return;
         }
 
-        // Validação Senha
+
         if (senha.trim().length() < 8){
             enviarNotificacaoDesktop("Senha inválida", "A senha tem que conter ao menos 8 caracteres");
             return;
@@ -115,7 +111,6 @@ public class CadastroController {
             System.out.println("A senha tem pelo menos 8 caracteres");
         }
 
-        // com todos os campos validados como true, podemos instanciar o Usuário no banco de dados
         Agenda novaAgenda = new Agenda();
         Usuario novoUsuario = new Usuario(nomeCompleto, numeroTelefone, localizacao, email, senha, dataNascimento, novaAgenda);
         usuarioDAO.salvarNovoUsuario(novoUsuario);
