@@ -118,16 +118,13 @@ public class CadastroController {
         enviarNotificacaoDesktop("Seja bem-vindo", "Usuário Criado com sucesso!");
 
         Stage janelaPrincipal = (Stage) txtCriarEmail.getScene().getWindow();
-        FXMLLoader dashboardFxml = new FXMLLoader(getClass().getResource("/com/thearckay/projetoagenda/fxml/Dashboard.fxml"));
-        Parent root = dashboardFxml.load();
+        FXMLLoader login = new FXMLLoader(getClass().getResource("/com/thearckay/projetoagenda/fxml/Login.fxml"));
+        Parent root = login.load();
         Scene cenaDashboard = new Scene(root);
 
         janelaPrincipal.setScene(cenaDashboard);
+        janelaPrincipal.centerOnScreen();
         janelaPrincipal.show();
-        janelaPrincipal.setResizable(true);
-        janelaPrincipal.setMaximized(true);
-
-
     }
 
     private void enviarNotificacaoDesktop(String titulo, String mensagem) {
