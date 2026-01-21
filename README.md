@@ -8,7 +8,7 @@
 ![Java](https://img.shields.io/badge/Java-21-orange)
 ![JavaFX](https://img.shields.io/badge/JavaFX-UI-blue)
 
-## 📖 Sobre o Projeto
+## Sobre o Projeto
 
 Este projeto foi desenvolvido com o objetivo principal de testar, aprender e aprimorar minhas **skills em Java**.
 
@@ -16,11 +16,11 @@ Embora seja um sistema funcional, o foco foi o desafio técnico e a aplicação 
 
 ---
 
-## 🏗 Arquitetura e Decisões de Projeto
+## Arquitetura e Decisões de Projeto
 
 O padrão arquitetural escolhido foi o **MVC (Model-View-Controller)**, devido à sua popularidade e eficiência na separação de responsabilidades.
 
-### 💡 Por que essa estrutura de navegação?
+### Por que essa estrutura de navegação?
 
 Sobre a modularização do FXML e do Dashboard, tomei uma decisão consciente de design voltada para o aprendizado:
 
@@ -28,7 +28,7 @@ Sobre a modularização do FXML e do Dashboard, tomei uma decisão consciente de
 
 ---
 
-## 🛠 Tecnologias Utilizadas
+## Tecnologias Utilizadas
 
 Como meu foco principal é o **Backend**, utilizei ferramentas para auxiliar na construção da interface visual:
 
@@ -40,7 +40,7 @@ Como meu foco principal é o **Backend**, utilizei ferramentas para auxiliar na 
 
 ---
 
-## 🚀 Como executar
+## Como executar
 
 1.  Clone o repositório.
 2.  Configure o banco de dados MySQL (script disponível no projeto).
@@ -48,6 +48,6 @@ Como meu foco principal é o **Backend**, utilizei ferramentas para auxiliar na 
 
 ---
 
-## 👨‍💻 Autor
+## Autor
 
 Desenvolvido por **Kayck Arcanjo**.
